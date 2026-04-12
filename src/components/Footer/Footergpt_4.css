@@ -1,0 +1,138 @@
+:root {
+    --cyber-black: #050505;
+    --cyber-blue: #00f3ff;
+    --cyber-pink: #ff00ff;
+    --cyber-dark-blue: #00353f;
+    --neon-shadow: 0 0 10px var(--cyber-blue);
+}
+
+.cyber-footer {
+    background-color: var(--cyber-black);
+    color: #fff;
+    padding: 100px 0 30px 0;
+    position: relative;
+    border-top: 2px solid var(--cyber-blue);
+    box-shadow: 0 -5px 20px rgba(0, 243, 255, 0.2);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Hiệu ứng tia quét laser chạy ngang */
+.cyber-scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 243, 255, 0.05), transparent);
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+.cyber-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.cyber-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+/* Logo phát sáng */
+.cyber-logo {
+    height: 60px;
+    filter: drop-shadow(0 0 8px var(--cyber-blue));
+    margin-bottom: 20px;
+}
+
+.cyber-desc {
+    color: var(--cyber-blue);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+/* Tiêu đề cột kiểu Glitch nhẹ */
+.cyber-title {
+    font-size: 1.2rem;
+    color: var(--cyber-pink);
+    text-shadow: 2px 2px var(--cyber-dark-blue);
+    margin-bottom: 30px;
+    position: relative;
+    font-weight: bold;
+}
+
+.cyber-links {
+    list-style: none;
+    padding: 0;
+}
+
+.cyber-links li {
+    margin-bottom: 15px;
+}
+
+.cyber-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    border-left: 0px solid var(--cyber-blue);
+}
+
+.cyber-links a:hover {
+    color: var(--cyber-blue);
+    padding-left: 10px;
+    border-left: 3px solid var(--cyber-blue);
+    text-shadow: var(--neon-shadow);
+}
+
+/* Box liên hệ cắt góc */
+.cyber-contact-box {
+    border: 1px solid var(--cyber-dark-blue);
+    padding: 20px;
+    background: rgba(0, 243, 255, 0.05);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+}
+
+.cyber-status {
+    color: #00ff00;
+    font-size: 0.8rem;
+    margin-top: 15px;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff00;
+    margin-right: 5px;
+}
+
+/* Phần đáy Footer */
+.cyber-bottom {
+    border-top: 1px solid var(--cyber-dark-blue);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--cyber-blue);
+    opacity: 0.6;
+}
+
+.highlight {
+    color: var(--cyber-pink);
+}
+
+@media (max-width: 768px) {
+    .cyber-grid { grid-template-columns: 1fr; }
+}

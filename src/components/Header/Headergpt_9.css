@@ -1,0 +1,148 @@
+/* --- Organic Palette --- */
+:root {
+    --sage-green: #8da399;     /* Xanh lá xám nhạt */
+    --deep-sage: #5d6d66;      /* Xanh lá xám đậm */
+    --soft-cream: #faf9f6;     /* Màu kem mịn */
+    --earth-brown: #4a4a4a;    /* Màu chữ xám đất */
+    --organic-shadow: 0 10px 30px rgba(141, 163, 153, 0.15);
+}
+
+.organic-header {
+    background-color: var(--soft-cream);
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.4s ease;
+}
+
+.organic-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+}
+
+/* --- Logo với vòng tròn nghệ thuật --- */
+.organic-logo {
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.organic-logo img {
+    height: 60px;
+    display: block;
+}
+
+.organic-logo:hover .logo-circle {
+    border-radius: 50%;
+    transform: rotate(5deg);
+}
+
+/* --- Menu tối giản --- */
+.organic-menu {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+    margin: 0;
+    padding: 0;
+}
+
+.organic-menu a {
+    text-decoration: none;
+    color: var(--deep-sage);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.organic-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    width: 0;
+    height: 4px;
+    background: var(--sage-green);
+    border-radius: 10px;
+    transition: 0.3s;
+    transform: translateX(-50%);
+}
+
+.organic-menu a:hover::after {
+    width: 20px;
+}
+
+/* --- Actions (Right) --- */
+.organic-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.action-item {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--deep-sage);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.action-item:hover {
+    background-color: white;
+    color: var(--sage-green);
+    box-shadow: var(--organic-shadow);
+}
+
+/* Cart Pill - Hình viên thuốc hiện đại */
+.cart-pill {
+    background: white;
+    width: auto;
+    padding: 0 15px;
+    border-radius: 30px;
+    gap: 8px;
+    border: 1px solid rgba(141, 163, 153, 0.2);
+}
+
+.cart-count {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* --- Mobile Toggle --- */
+.mobile-toggle {
+    display: none;
+    font-size: 24px;
+    color: var(--sage-green);
+    cursor: pointer;
+}
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+    .organic-nav {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        background: var(--soft-cream);
+        height: calc(100vh - 80px);
+        transition: 0.4s;
+    }
+    .organic-nav.active { left: 0; }
+    .organic-menu {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+    }
+    .mobile-toggle { display: block; }
+    .organic-logo { position: static; transform: none; }
+}

@@ -1,0 +1,106 @@
+/* Header.css - Modern Style */
+.modern-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: transparent;
+    transition: all 0.4s ease;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Khi cuộn chuột: Nền trắng, chữ đen, bóng đổ nhẹ */
+.modern-header.is-scrolled {
+    background: #ffffff;
+    padding: 10px 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-bottom: none;
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Logo phóng to ở giữa */
+.brand-logo img {
+    height: 60px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.modern-header.is-scrolled .brand-logo img {
+    height: 45px;
+}
+
+/* Menu tối giản */
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    margin: 0;
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.nav-list a:hover {
+    color: #0c713d; /* Màu xanh đặc trưng làm điểm nhấn */
+}
+
+/* Giỏ hàng và User */
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.cart-icon-wrapper {
+    position: relative;
+}
+
+.cart-dot {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #ce1212;
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+
+/* Dropdown Menu hiện đại */
+.has-submenu { position: relative; }
+.submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    width: 200px;
+    display: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    padding: 10px 0;
+}
+
+.has-submenu:hover .submenu {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

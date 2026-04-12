@@ -1,0 +1,141 @@
+:root {
+    --gatsby-dark: #121212;
+    --gatsby-gold: #d4af37; /* Màu vàng Gold đặc trưng */
+    --gatsby-gold-light: #f1d592;
+    --gatsby-text: #e0e0e0;
+}
+
+.gatsby-footer {
+    background-color: var(--gatsby-dark);
+    color: var(--gatsby-text);
+    padding: 0 0 40px 0;
+    font-family: 'Playfair Display', serif;
+    position: relative;
+    text-align: center;
+}
+
+/* Họa tiết viền Art Deco phía trên */
+.deco-border-top {
+    height: 10px;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--gatsby-gold),
+        var(--gatsby-gold) 10px,
+        var(--gatsby-dark) 10px,
+        var(--gatsby-dark) 20px
+    );
+    border-bottom: 2px solid var(--gatsby-gold);
+    margin-bottom: 60px;
+}
+
+.gatsby-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Khung ảnh Logo nghệ thuật */
+.deco-frame {
+    display: inline-block;
+    padding: 15px;
+    border: 2px solid var(--gatsby-gold);
+    outline: 5px solid var(--gatsby-dark);
+    outline-offset: -10px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.gatsby-logo {
+    height: 70px;
+    filter: grayscale(1) brightness(1.5);
+}
+
+.gatsby-site-name {
+    font-size: 2.5rem;
+    letter-spacing: 8px;
+    color: var(--gatsby-gold);
+    margin: 10px 0 5px 0;
+    font-weight: 300;
+}
+
+.gatsby-subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    margin-bottom: 50px;
+    color: var(--gatsby-gold-light);
+}
+
+/* Grid Layout */
+.gatsby-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    border-top: 1px solid rgba(212, 175, 55, 0.3);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 40px 0;
+    margin-bottom: 40px;
+}
+
+.gatsby-col h4 {
+    color: var(--gatsby-gold);
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+.gatsby-col a {
+    display: block;
+    color: var(--gatsby-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.gatsby-col a:hover {
+    color: var(--gatsby-gold-light);
+    letter-spacing: 3px;
+}
+
+/* Socials & Phone */
+.gatsby-socials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.gatsby-socials a {
+    font-size: 1.2rem;
+    color: var(--gatsby-gold);
+}
+
+.gatsby-phone {
+    font-size: 1.1rem;
+    color: var(--gatsby-gold-light);
+    border: 1px solid var(--gatsby-gold);
+    display: inline-block;
+    padding: 5px 15px;
+}
+
+/* Bottom */
+.gatsby-bottom {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: #666;
+}
+
+.deco-line {
+    width: 60px;
+    height: 2px;
+    background: var(--gatsby-gold);
+    margin: 0 auto 20px auto;
+}
+
+@media (max-width: 768px) {
+    .gatsby-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}

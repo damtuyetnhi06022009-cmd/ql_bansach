@@ -1,0 +1,151 @@
+:root {
+    --zen-bg: #f9f9f9;       /* Trắng xám nhạt */
+    --zen-text: #2c3e50;     /* Xám than */
+    --zen-accent: #e67e22;   /* Cam đất (nhấn nhẹ như màu mộc) */
+    --zen-gray: #bdc3c7;     /* Xám nhạt cho line */
+}
+
+.zen-footer {
+    background-color: var(--zen-bg);
+    color: var(--zen-text);
+    padding: 100px 0 40px 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.zen-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.zen-top-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 80px;
+}
+
+/* Brand Style */
+.zen-logo-img {
+    height: 40px;
+    margin-bottom: 25px;
+    opacity: 0.7;
+}
+
+.zen-philosophy {
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    max-width: 200px;
+    line-height: 1.8;
+}
+
+.zen-social-minimal {
+    margin-top: 30px;
+    display: flex;
+    gap: 20px;
+}
+
+.zen-social-minimal a {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--zen-text);
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.zen-social-minimal a:hover {
+    border-bottom: 1px solid var(--zen-text);
+}
+
+/* Nav Grid */
+.zen-nav-grid {
+    display: flex;
+    gap: 80px;
+}
+
+.zen-nav-label {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    color: var(--zen-gray);
+    margin-bottom: 25px;
+}
+
+.zen-nav-col a {
+    display: block;
+    text-decoration: none;
+    color: var(--zen-text);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    transition: color 0.3s;
+}
+
+.zen-nav-col a:hover {
+    color: var(--zen-accent);
+}
+
+/* Address Section */
+.zen-address {
+    text-align: right;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    line-height: 2;
+}
+
+.zen-mail {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* Bottom Bar */
+.zen-line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--zen-gray);
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+.zen-copyright-wrapper {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: #95a5a6;
+}
+
+.zen-lang-selector span {
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.zen-lang-selector span:hover {
+    color: var(--zen-text);
+}
+
+/* Trang trí vòng tròn Zen (Enso circle) mờ */
+.zen-circle-bg {
+    position: absolute;
+    right: -50px;
+    top: -50px;
+    width: 300px;
+    height: 300px;
+    border: 40px solid rgba(0,0,0,0.02);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .zen-top-content {
+        flex-direction: column;
+        gap: 50px;
+    }
+    .zen-address {
+        text-align: left;
+    }
+}

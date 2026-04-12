@@ -1,0 +1,157 @@
+/* --- Vintage Palette --- */
+:root {
+    --vintage-dark: #3d2b1f; /* Màu nâu gỗ đậm */
+    --vintage-cream: #f4f1ea; /* Màu giấy cũ */
+    --vintage-gold: #c5a059; /* Màu vàng đồng cổ */
+    --vintage-border: rgba(61, 43, 31, 0.15);
+}
+
+.vintage-header {
+    width: 100%;
+    background-color: var(--vintage-cream);
+    font-family: 'Georgia', serif; /* Font chữ có chân cổ điển */
+    border-bottom: 3px double var(--vintage-dark); /* Đường kẻ đôi đặc trưng */
+}
+
+.vintage-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/* --- Top Bar --- */
+.vintage-top-bar {
+    background: var(--vintage-dark);
+    color: var(--vintage-cream);
+    padding: 8px 0;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.top-bar-right span {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.top-bar-right span:hover {
+    color: var(--vintage-gold);
+}
+
+/* --- Main Section & Logo --- */
+.vintage-main-section {
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    background-image: url('https://www.transparenttextures.com/patterns/paper.png'); /* Texture giấy cũ */
+}
+
+.vintage-logo {
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.vintage-logo img {
+    height: 90px;
+    filter: sepia(0.5); /* Hiệu ứng ảnh cũ cho logo */
+    transition: 0.5s;
+}
+
+.vintage-logo:hover img {
+    filter: sepia(0);
+    transform: scale(1.05);
+}
+
+/* --- Navigation --- */
+.vintage-nav {
+    border-top: 1px solid var(--vintage-border);
+    padding: 15px 0;
+}
+
+.vintage-menu {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+.vintage-menu > li > a {
+    text-decoration: none;
+    color: var(--vintage-dark);
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.vintage-menu > li > a::after {
+    content: '◈'; /* Biểu tượng cổ điển */
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.vintage-menu > li:hover > a {
+    color: var(--vintage-gold);
+}
+
+.vintage-menu > li:hover > a::after {
+    opacity: 1;
+}
+
+/* --- Dropdown --- */
+.v-has-child { position: relative; }
+
+.v-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: none;
+    padding: 10px 0;
+    z-index: 100;
+    border-top: 2px solid var(--vintage-dark);
+}
+
+.v-has-child:hover .v-dropdown {
+    display: block;
+    animation: fadeIn 0.4s ease;
+}
+
+.v-dropdown li a {
+    display: block;
+    padding: 10px 20px;
+    color: var(--vintage-dark);
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.v-dropdown li a:hover {
+    background: var(--vintage-cream);
+    color: var(--vintage-gold);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}

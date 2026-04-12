@@ -1,0 +1,502 @@
+[
+    {
+        "id":1,
+        "name":"Bến xe",
+        "idcategory":1
+    },
+    {
+        "id":2,
+        "name":"Ngõ Ngô Đồng",
+        "idcategory":1
+    },
+    {
+        "id":3,
+        "name":"Sách Cây Cam Ngọt Của Tôi",
+        "idcategory":1
+    },
+    {
+        "id":4,
+        "name":"Sách Làm Bạn Với Bầu Trời",
+        "idcategory":1
+    },
+    {
+        "id":5,
+        "name":"Sách Trốn Lên Mái Nhà Để Khóc",
+        "idcategory":1
+    },
+    {
+        "id":6,
+        "name":"Sách Tôi Thấy Hoa Vàng Trên Cỏ Xanh ",
+        "idcategory":1
+    },
+    {
+        "id":7,
+        "name":"Sách Hồ Điệp Và Kình Ngư",
+        "idcategory":1
+    },
+    {
+        "id":8,
+        "name":"Sách Tôi Là Bêtô",
+        "idcategory":1
+    },
+    {
+        "id":9,
+        "name":"Sách Có Hai Con Mèo Ngồi Bên Cửa Sổ",
+        "idcategory":1
+    },
+    {
+        "id":10,
+        "name":"Sách Như Trời Sao Ôm Lấy Đại Dương",
+        "idcategory":1
+    },
+    {
+        "id":11,
+        "name":"Sách Bí Quyết Hội Hoạ - Phác Hoạ Tĩnh Vật",
+        "idcategory":2
+    },
+    {
+        "id":12,
+        "name":"Sách Vẽ Màu Nước Cho Người Mới Bắt Đầu",
+        "idcategory":2
+    },
+    {
+        "id":13,
+        "name":"Nghệ thuật với thị giác",
+        "idcategory":2
+    },
+    {
+        "id":14,
+        "name":"Bí Quyết Vẽ Bút Chì",
+        "idcategory":2
+    },
+    {
+        "id":15,
+        "name":"Sách Bí Quyết Vẽ Chì Cho Người Mới",
+        "idcategory":2
+    },
+    {
+        "id":16,
+        "name":"Bách Khoa Toàn Thư - Thực Hành Hội Họa",
+        "idcategory":2
+    },
+    {
+        "id":17,
+        "name":"Hướng Dẫn Vẽ Khuôn Mặt",
+        "idcategory":2
+    },
+    {
+        "id":18,
+        "name":"Bí Quyết Vẽ Phong Cảnh Tự Nhiên",
+        "idcategory":2
+    },
+    {
+        "id":19,
+        "name":"Hướng Dẫn Vẽ Truyện Tranh",
+        "idcategory":2
+    },
+    {
+        "id":20,
+        "name":"Nguyên Lý Hội Họa Đen Trắng",
+        "idcategory":2
+    },
+    {
+        "id":21,
+        "name":"Thu Nhập Thụ Động",
+        "idcategory":3
+    },
+    {
+        "id":22,
+        "name":"Sách Leaders Create Leaders",
+        "idcategory":3
+    },
+    {
+        "id":23,
+        "name":"Sách Quản Trị Chiến Lược Thực Chiến ",
+        "idcategory":3
+    },
+    {
+        "id":24,
+        "name":"Sách KPI",
+        "idcategory":3
+    },
+    {
+        "id":25,
+        "name":"Sách Tối Ưu Vận Hành Doanh Nghiệp",
+        "idcategory":3
+    },
+    {
+        "id":26,
+        "name":"Sách Xây Dựng Hệ Thống Bán Hàng Đa Kênh",
+        "idcategory":3
+    },
+    {
+        "id":27,
+        "name":"Sách Năm Tính Cách Tiền Bạc",
+        "idcategory":3
+    },
+    {
+        "id":28,
+        "name":"Sách Tư Duy Làm Giàu",
+        "idcategory":3
+    },
+    {
+        "id":29,
+        "name":"Sách Lãnh Đạo Khôn Ngoan",
+        "idcategory":3
+    },
+    {
+        "id":30,
+        "name":"Sách Quy Luật Của Tiền",
+        "idcategory":3
+    },
+    {
+        "id":31,
+        "name":"Sách Kỹ Năng Sống",
+        "idcategory":4
+    },
+    {
+        "id":32,
+        "name":"Sách Kỹ Năng Sống",
+        "idcategory":4
+    },
+    {
+        "id":33,
+        "name":"Sách Kỹ Năng Sống",
+        "idcategory":4
+    },
+    {
+        "id":34,
+        "name":"Sách Kỹ Năng Sống",
+        "idcategory":4
+    },
+    {
+        "id":35,
+        "name":"Sách Kỹ Năng Sống",
+        "idcategory":4
+    },
+    {
+        "id":36,
+        "name":"Sách Kỹ Năng Sống",
+        "idcategory":4
+    },
+    {
+        "id":37,
+        "name":"Sách Kỹ Năng Sống",
+        "idcategory":4
+    },
+    {
+        "id":38,
+        "name":"Sách Kỹ Năng Sống",
+        "idcategory":4
+    },
+    {
+        "id":39,
+        "name":"Sách Kỹ Năng Sống",
+        "idcategory":4
+    },
+    {
+        "id":40,
+        "name":"Sách Kỹ Năng Sống",
+        "idcategory":4
+    },
+    {
+        "id":41,
+        "name":"Sách Học Ngoại Ngữ",
+        "idcategory":5
+    },
+    {
+        "id":42,
+        "name":"Sách Học Ngoại Ngữ",
+        "idcategory":5
+    },
+    {
+        "id":43,
+        "name":"Sách Học Ngoại Ngữ",
+        "idcategory":5
+    },
+    {
+        "id":44,
+        "name":"Sách Học Ngoại Ngữ",
+        "idcategory":5
+    },
+    {
+        "id":45,
+        "name":"Sách Học Ngoại Ngữ",
+        "idcategory":5
+    },
+    {
+        "id":46,
+        "name":"Sách Học Ngoại Ngữ",
+        "idcategory":5
+    },
+    {
+        "id":47,
+        "name":"Sách Học Ngoại Ngữ",
+        "idcategory":5
+    },
+    {
+        "id":48,
+        "name":"Sách Học Ngoại Ngữ",
+        "idcategory":5
+    },
+    {
+        "id":49,
+        "name":"Sách Học Ngoại Ngữ",
+        "idcategory":5
+    },
+    {
+        "id":50,
+        "name":"Sách Học Ngoại Ngữ",
+        "idcategory":5
+    },
+    {
+        "id":51,
+        "name":"Sách Du Lịch",
+        "idcategory":6
+    },
+    {
+        "id":52,
+        "name":"Sách Du Lịch",
+        "idcategory":6
+    },
+    {
+        "id":53,
+        "name":"Sách Du Lịch",
+        "idcategory":6
+    },
+    {
+        "id":54,
+        "name":"Sách Du Lịch",
+        "idcategory":6
+    },
+    {
+        "id":55,
+        "name":"Sách Du Lịch",
+        "idcategory":6
+    },
+    {
+        "id":56,
+        "name":"Sách Du Lịch",
+        "idcategory":6
+    },
+    {
+        "id":57,
+        "name":"Sách Du Lịch",
+        "idcategory":6
+    },
+    {
+        "id":58,
+        "name":"Sách Du Lịch",
+        "idcategory":6
+    },
+    {
+        "id":59,
+        "name":"Sách Du Lịch",
+        "idcategory":6
+    },
+    {
+        "id":60,
+        "name":"Sách Du Lịch",
+        "idcategory":6
+    },
+    {
+        "id":61,
+        "name":"Sách Tâm Lý Học",
+        "idcategory":7
+    },
+    {
+        "id":62,
+        "name":"Sách Tâm Lý Học",
+        "idcategory":7
+    },
+    {
+        "id":63,
+        "name":"Sách Tâm Lý Học",
+        "idcategory":7
+    },
+    {
+        "id":64,
+        "name":"Sách Tâm Lý Học",
+        "idcategory":7
+    },
+    {
+        "id":65,
+        "name":"Sách Tâm Lý Học",
+        "idcategory":7
+    },
+    {
+        "id":66,
+        "name":"Sách Tâm Lý Học",
+        "idcategory":7
+    },
+    {
+        "id":67,
+        "name":"Sách Tâm Lý Học",
+        "idcategory":7
+    },
+    {
+        "id":68,
+        "name":"Sách Tâm Lý Học",
+        "idcategory":7
+    },
+    {
+        "id":69,
+        "name":"Sách Tâm Lý Học",
+        "idcategory":7
+    },
+    {
+        "id":70,
+        "name":"Sách Tâm Lý Học",
+        "idcategory":7
+    },
+    {
+        "id":71,
+        "name":"Sách Khoa Học Kỹ Thuật",
+        "idcategory":8
+    },
+    {
+        "id":72,
+        "name":"Sách Khoa Học Kỹ Thuật",
+        "idcategory":8
+    },
+    {
+        "id":73,
+        "name":"Sách Khoa Học Kỹ Thuật",
+        "idcategory":8
+    },
+    {
+        "id":74,
+        "name":"Sách Khoa Học Kỹ Thuật",
+        "idcategory":8
+    },
+    {
+        "id":75,
+        "name":"Sách Khoa Học Kỹ Thuật",
+        "idcategory":8
+    },
+    {
+        "id":76,
+        "name":"Sách Khoa Học Kỹ Thuật",
+        "idcategory":8
+    },
+    {
+        "id":77,
+        "name":"Sách Khoa Học Kỹ Thuật",
+        "idcategory":8
+    },
+    {
+        "id":78,
+        "name":"Sách Khoa Học Kỹ Thuật",
+        "idcategory":8
+    },
+    {
+        "id":79,
+        "name":"Sách Khoa Học Kỹ Thuật",
+        "idcategory":8
+    },
+    {
+        "id":80,
+        "name":"Sách Khoa Học Kỹ Thuật",
+        "idcategory":8
+    },
+    {
+        "id":81,
+        "name":"Sách Lịch Sử",
+        "idcategory":9
+    },
+    {
+        "id":82,
+        "name":"Sách Lịch Sử",
+        "idcategory":9
+    },
+    {
+        "id":83,
+        "name":"Sách Lịch Sử",
+        "idcategory":9
+    },
+    {
+        "id":84,
+        "name":"Sách Lịch Sử",
+        "idcategory":9
+    },
+    {
+        "id":85,
+        "name":"Sách Lịch Sử",
+        "idcategory":9
+    },
+    {
+        "id":86,
+        "name":"Sách Lịch Sử",
+        "idcategory":9
+    },
+    {
+        "id":87,
+        "name":"Sách Lịch Sử",
+        "idcategory":9
+    },
+    {
+        "id":88,
+        "name":"Sách Lịch Sử",
+        "idcategory":9
+    },
+    {
+        "id":89,
+        "name":"Sách Lịch Sử",
+        "idcategory":9
+    },
+    {
+        "id":90,
+        "name":"Sách Lịch Sử",
+        "idcategory":9
+    },
+    {
+        "id":91,
+        "name":"Sách Giáo Khoa",
+        "idcategory":10
+    },
+    {
+        "id":92,
+        "name":"Sách Giáo Khoa",
+        "idcategory":10
+    },
+    {
+        "id":93,
+        "name":"Sách Giáo Khoa",
+        "idcategory":10
+    },
+    {
+        "id":94,
+        "name":"Sách Giáo Khoa",
+        "idcategory":10
+    },
+    {
+        "id":95,
+        "name":"Sách Giáo Khoa",
+        "idcategory":10
+    },
+    {
+        "id":96,
+        "name":"Sách Giáo Khoa",
+        "idcategory":10
+    },
+    {
+        "id":97,
+        "name":"Sách Giáo Khoa",
+        "idcategory":10
+    },
+    {
+        "id":98,
+        "name":"Sách Giáo Khoa",
+        "idcategory":10
+    },
+    {
+        "id":99,
+        "name":"Sách Giáo Khoa",
+        "idcategory":10
+    },
+    {
+        "id":100,
+        "name":"Sách Giáo Khoa",
+        "idcategory":10
+    }
+]

@@ -1,0 +1,117 @@
+/* Header.css - Eco-Minimalist Version */
+
+.eco-header {
+    background-color: #fdfbf7; /* Màu kem nhạt cực kỳ dịu mắt */
+    height: 80px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid #eee;
+}
+
+.eco-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo & Brand */
+.eco-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.eco-logo img {
+    height: 45px;
+    border-radius: 50%; /* Làm logo tròn lại cho mềm mại */
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #4a5d4e; /* Màu xanh lá đậm gỗ */
+    letter-spacing: 1px;
+}
+
+/* Navigation */
+.eco-nav {
+    display: flex;
+    gap: 40px;
+}
+
+.eco-link {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+}
+
+.eco-link:hover {
+    color: #8da399; /* Màu Sage Green */
+}
+
+/* Actions */
+.eco-actions {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.eco-user {
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #4a5d4e;
+    font-weight: 500;
+}
+
+.eco-cart-btn {
+    background: #8da399; /* Nút màu xanh lá nhạt */
+    border: none;
+    padding: 10px 18px;
+    border-radius: 30px; /* Bo tròn mạnh */
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.eco-cart-btn:hover {
+    background: #7a8f85;
+    transform: scale(1.05);
+}
+
+.cart-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.eco-badge {
+    background: #e67e22; /* Màu cam đất làm điểm nhấn nổi bật */
+    color: white;
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    position: absolute;
+    top: -12px;
+    right: -15px;
+    border: 2px solid #fdfbf7;
+}
+
+/* Responsive mượt mà */
+@media (max-width: 992px) {
+    .eco-nav {
+        gap: 20px;
+    }
+    .logo-text {
+        display: none;
+    }
+}

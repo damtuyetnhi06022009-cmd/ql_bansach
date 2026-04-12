@@ -1,0 +1,144 @@
+:root {
+    --eco-bg: #fdfbf7;      /* Màu kem nhạt */
+    --eco-green: #1b4332;   /* Xanh lá đậm */
+    --eco-text: #2d3436;    /* Xám đen */
+    --eco-border: #e0e0e0;  /* Xám nhạt cho line */
+}
+
+.novela-eco-footer {
+    background-color: var(--eco-bg);
+    color: var(--eco-text);
+    padding: 80px 5% 40px 5%;
+    font-family: 'Playfair Display', serif; /* Nếu bạn có font này sẽ rất đẹp */
+}
+
+/* Phần đăng ký Newsletter bên trên */
+.footer-top-newsletter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.newsletter-content h3 {
+    font-size: 1.8rem;
+    color: var(--eco-green);
+    margin-bottom: 5px;
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    padding: 12px 20px;
+    border: 1px solid var(--eco-border);
+    background: transparent;
+    width: 300px;
+    outline: none;
+}
+
+.newsletter-form button {
+    background-color: var(--eco-green);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: opacity 0.3s;
+}
+
+.newsletter-form button:hover {
+    opacity: 0.9;
+}
+
+.footer-divider {
+    border: none;
+    border-top: 1px solid var(--eco-border);
+    margin-bottom: 60px;
+}
+
+/* Middle Section */
+.footer-middle-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 80px;
+}
+
+.eco-logo {
+    height: 45px;
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.eco-socials {
+    display: flex;
+    gap: 20px;
+}
+
+.eco-socials a {
+    color: var(--eco-green);
+    font-size: 1.2rem;
+    transition: transform 0.3s;
+}
+
+.eco-socials a:hover {
+    transform: scale(1.2);
+}
+
+/* Grid Menu */
+.footer-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+}
+
+.nav-col h5 {
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: var(--eco-green);
+    margin-bottom: 25px;
+}
+
+.nav-col a, .nav-col span {
+    display: block;
+    text-decoration: none;
+    color: #636e72;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    transition: color 0.3s;
+}
+
+.nav-col a:hover {
+    color: var(--eco-green);
+}
+
+/* Bottom */
+.footer-bottom-eco {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid var(--eco-border);
+    font-size: 0.85rem;
+    color: #b2bec3;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 15px;
+    font-size: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .footer-top-newsletter, .footer-middle-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    .newsletter-form input {
+        width: 100%;
+    }
+}

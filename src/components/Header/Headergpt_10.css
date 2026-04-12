@@ -1,0 +1,112 @@
+/* --- Tech Minimal Palette --- */
+:root {
+    --tech-bg: rgba(255, 255, 255, 0.8);
+    --tech-text: #1d1d1f;
+    --tech-accent: #0071e3; /* Màu xanh Blue của Apple */
+    --tech-blur: blur(20px);
+}
+
+.tech-header {
+    width: 100%;
+    height: 52px; /* Chiều cao rất thấp tạo cảm giác gọn gàng */
+    background: var(--tech-bg);
+    backdrop-filter: var(--tech-blur);
+    -webkit-backdrop-filter: var(--tech-blur);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Khi cuộn trang thì mờ hơn và khít hơn */
+.tech-header.tech-fixed {
+    height: 44px;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.tech-nav-container {
+    max-width: 1024px; /* Giới hạn độ rộng như trang Apple */
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/* --- Logo --- */
+.tech-logo img {
+    height: 60px; /* Logo nhỏ gọn */
+    opacity: 0.9;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.tech-logo:hover img {
+    opacity: 1;
+}
+
+/* --- Navigation Links --- */
+.tech-nav-links {
+    display: flex;
+    gap: 35px;
+}
+
+.tech-link {
+    text-decoration: none;
+    color: var(--tech-text);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.tech-link:hover {
+    opacity: 1;
+    color: var(--tech-accent);
+}
+
+/* --- Icons --- */
+.tech-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 16px;
+    color: var(--tech-text);
+}
+
+.tech-icon-btn {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.2s;
+}
+
+.tech-icon-btn:hover {
+    opacity: 1;
+}
+
+/* Giỏ hàng dạng Túi (Bag) */
+.tech-cart-wrapper {
+    position: relative;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.tech-bag-count {
+    position: absolute;
+    bottom: 0;
+    right: -6px;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--tech-text);
+}
+
+/* Hiệu ứng mượt cho các liên kết trên mobile */
+@media (max-width: 768px) {
+    .tech-nav-links {
+        display: none; /* Mobile sẽ dùng menu riêng hoặc icon hamburger */
+    }
+}
