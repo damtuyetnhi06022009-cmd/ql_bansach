@@ -61,12 +61,12 @@
     },
     {
         "id":13,
-        "name":"Nghệ thuật với thị giác",
+        "name":"Sách Nghệ thuật với thị giác",
         "idcategory":2
     },
     {
         "id":14,
-        "name":"Bí Quyết Vẽ Bút Chì",
+        "name":"Sách Bí Quyết Vẽ Bút Chì",
         "idcategory":2
     },
     {
@@ -76,32 +76,32 @@
     },
     {
         "id":16,
-        "name":"Bách Khoa Toàn Thư - Thực Hành Hội Họa",
+        "name":"Sách Bách Khoa Toàn Thư - Thực Hành Hội Họa",
         "idcategory":2
     },
     {
         "id":17,
-        "name":"Hướng Dẫn Vẽ Khuôn Mặt",
+        "name":"Sách Hướng Dẫn Vẽ Khuôn Mặt",
         "idcategory":2
     },
     {
         "id":18,
-        "name":"Bí Quyết Vẽ Phong Cảnh Tự Nhiên",
+        "name":"Sách Bí Quyết Vẽ Phong Cảnh Tự Nhiên",
         "idcategory":2
     },
     {
         "id":19,
-        "name":"Hướng Dẫn Vẽ Truyện Tranh",
+        "name":"Sách Hướng Dẫn Vẽ Truyện Tranh",
         "idcategory":2
     },
     {
         "id":20,
-        "name":"Nguyên Lý Hội Họa Đen Trắng",
+        "name":"Sách Nguyên Lý Hội Họa Đen Trắng",
         "idcategory":2
     },
     {
         "id":21,
-        "name":"Thu Nhập Thụ Động",
+        "name":"Sách Thu Nhập Thụ Động",
         "idcategory":3
     },
     {
@@ -151,152 +151,152 @@
     },
     {
         "id":31,
-        "name":"Sách Kỹ Năng Sống",
+        "name":"Sách Hiểu biết về trái tim",
         "idcategory":4
     },
     {
         "id":32,
-        "name":"Sách Kỹ Năng Sống",
+        "name":"Sách 30 tuổi mọi thứ chỉ mới bắt đầu",
         "idcategory":4
     },
     {
         "id":33,
-        "name":"Sách Kỹ Năng Sống",
+        "name":"Sách sức mạnh của EQ",
         "idcategory":4
     },
     {
         "id":34,
-        "name":"Sách Kỹ Năng Sống",
+        "name":"Sách sức hút của sự tử tế",
         "idcategory":4
     },
     {
         "id":35,
-        "name":"Sách Kỹ Năng Sống",
+        "name":"Sách tĩnh lặng và dáng vẻ đẹp nhất của bạn",
         "idcategory":4
     },
     {
         "id":36,
-        "name":"Sách Kỹ Năng Sống",
+        "name":"Sách sự kỳ diệu của lòng biết ơn",
         "idcategory":4
     },
     {
         "id":37,
-        "name":"Sách Kỹ Năng Sống",
+        "name":"Sách viết từ số 0",
         "idcategory":4
     },
     {
         "id":38,
-        "name":"Sách Kỹ Năng Sống",
+        "name":"Sách làm sao học ít hiểu nhiều",
         "idcategory":4
     },
     {
         "id":39,
-        "name":"Sách Kỹ Năng Sống",
+        "name":"Sách Soul therapy",
         "idcategory":4
     },
     {
         "id":40,
-        "name":"Sách Kỹ Năng Sống",
+        "name":"Sách nghệ thuật không nổi giận",
         "idcategory":4
     },
     {
         "id":41,
-        "name":"Sách Học Ngoại Ngữ",
+        "name":"Sách Giáo Trình Chuẩn HSK 1",
         "idcategory":5
     },
     {
         "id":42,
-        "name":"Sách Học Ngoại Ngữ",
+        "name":"Sách Cambridge IELTS 20",
         "idcategory":5
     },
     {
         "id":43,
-        "name":"Sách Học Ngoại Ngữ",
+        "name":"Sách Tự Học Từ Vận Tiếng Anh",
         "idcategory":5
     },
     {
         "id":44,
-        "name":"Sách Học Ngoại Ngữ",
+        "name":"Sách IELS Writing",
         "idcategory":5
     },
     {
         "id":45,
-        "name":"Sách Học Ngoại Ngữ",
+        "name":"Sách Giáo Trình Chuẩn HSK 2",
         "idcategory":5
     },
     {
         "id":46,
-        "name":"Sách Học Ngoại Ngữ",
+        "name":"Sách Giáo Trình Chuẩn YCI 1",
         "idcategory":5
     },
     {
         "id":47,
-        "name":"Sách Học Ngoại Ngữ",
+        "name":"Sách Giáo Trình Chuẩn YCI 2",
         "idcategory":5
     },
     {
         "id":48,
-        "name":"Sách Học Ngoại Ngữ",
+        "name":"Sách Tiếng Anh Genz Trong Giao Tiếp",
         "idcategory":5
     },
     {
         "id":49,
-        "name":"Sách Học Ngoại Ngữ",
+        "name":"Sách Tập Viết Tiếng Nhật",
         "idcategory":5
     },
     {
         "id":50,
-        "name":"Sách Học Ngoại Ngữ",
+        "name":"Sách 2000 Từ Vựng Tiếng Nhật",
         "idcategory":5
     },
     {
         "id":51,
-        "name":"Sách Du Lịch",
+        "name":"Sách Du Lịch Văn Hóa Hội An",
         "idcategory":6
     },
     {
         "id":52,
-        "name":"Sách Du Lịch",
+        "name":"Sách Phép Thờ Cúng Của Người An Nam ",
         "idcategory":6
     },
     {
         "id":53,
-        "name":"Sách Du Lịch",
+        "name":"Sách Cẩm Nang Du Lịch Mỹ",
         "idcategory":6
     },
     {
         "id":54,
-        "name":"Sách Du Lịch",
+        "name":"Sách Phát Triển Du Lịch Cộng Đồng",
         "idcategory":6
     },
     {
         "id":55,
-        "name":"Sách Du Lịch",
+        "name":"Sách Hiểu Để Chọn",
         "idcategory":6
     },
     {
         "id":56,
-        "name":"Sách Du Lịch",
+        "name":"Sách Tiếng Anh Du Lịch",
         "idcategory":6
     },
     {
         "id":57,
-        "name":"Sách Du Lịch",
+        "name":"Sách Phú Yên dất và người",
         "idcategory":6
     },
     {
         "id":58,
-        "name":"Sách Du Lịch",
+        "name":"Sách Văn Hóa Pháp",
         "idcategory":6
     },
     {
         "id":59,
-        "name":"Sách Du Lịch",
+        "name":"Sách Văn Hóa Thái Lan",
         "idcategory":6
     },
     {
         "id":60,
-        "name":"Sách Du Lịch",
+        "name":"Sách Triết lý sống của người Nhật",
         "idcategory":6
     },
     {
