@@ -1,0 +1,52 @@
+[
+    {
+        "id":1,
+        "name":"Võ Nguyễn Phương Uyên",
+        "posittion":"Quản trị viên hệ thống"
+    },
+    {
+        "id":2,
+        "name":"Nguyễn Chí Hiếu",
+        "posittion":"Nhân viên marketing"
+    },
+    {
+        "id":3,
+        "name":"Nguyễn Ngọc Quỳnh Nhi",
+        "posittion":"Nhân viên bán hàng"
+    },
+    {
+        "id":4,
+        "name":"Nguyễn Ngọc Quỳnh Như",
+        "posittion":"Nhân viên chăm sóc khách hàng"
+    },
+    {
+        "id":5,
+        "name":"Ngô Đặng Yến Nhi",
+        "posittion":"Nhân viên giao hàng"
+    },
+    {
+        "id":6,
+        "name":"Võ Phạm Khánh Vân",
+        "posittion":"Nhân viên quản lý nội dung"
+    },
+    {
+        "id":7,
+        "name":"Phùng Nguyễn Cát Tường",
+        "posittion":"Nhân viên quản lý kho"
+    },
+    {
+        "id":8,
+        "name":"Kiều Gia Hân",
+        "posittion":"Quản lý cửa hàng"
+    },
+    {
+        "id":9,
+        "name":"Lê Nguyễn Mai Quỳnh",
+        "posittion":"Nhân viên kỹ thuật"
+    },
+    {
+        "id":10,
+        "name":"Lê Thanh Hoàng",
+        "posittion":"Nhân viên kế toán"
+    }
+]
