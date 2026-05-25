@@ -13,7 +13,7 @@ import AdminEmployee from './components/Pages/AdminEmployee';
 import AdminInvoiceDetails from './components/Pages/AdminInvoiceDetails';
 import AdminProduct from './components/Pages/AdminProduct';
 import Login from "./components/Pages/Login";
-import Profile from "./components/Pages/Profile";
+import Profile from "./components/Pages/profile";
 import Signup from "./components/Pages/Signup";
 import Banner from './components/Banner/Banner';
 
