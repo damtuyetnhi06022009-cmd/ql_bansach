@@ -12,21 +12,13 @@ const DetailProduct = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (product) return;
-
         const fetchProduct = async () => {
             try {
                 const response = await fetch('/product.json');
-                if (!response.ok) {
-                    throw new Error('Không thể tải thông tin sản phẩm');
-                }
-
+                if (!response.ok) throw new Error('Không thể tải thông tin sản phẩm');
                 const data = await response.json();
                 const found = data.find((item) => String(item.id) === String(id));
-
-                if (!found) {
-                    throw new Error('sản phẩm không tồn tại');
-                }
+                if (!found) throw new Error('Sản phẩm không tồn tại');
 
                 setProduct({
                     ...found,
@@ -38,9 +30,8 @@ const DetailProduct = () => {
                 setIsLoading(false);
             }
         };
-
         fetchProduct();
-    }, [id, product]);
+    }, [id]);
 
     if (isLoading) {
         return <div className="detail-container">Đang tải chi tiết sản phẩm..</div>;
@@ -63,7 +54,7 @@ const DetailProduct = () => {
             <div className="detail-card">
                 <div className="detail-image">
                     <img
-                        src={product.imageKey || 'https://via.placeholder.com/500x350'}
+                        src={product.image || 'https://via.placeholder.com/500x350'}
                         alt={product.name}
                     />
                 </div>
