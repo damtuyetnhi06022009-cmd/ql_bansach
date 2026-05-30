@@ -8,6 +8,15 @@ import Cart from "./components/Pages/Cart";
 import Login from "./components/Pages/Login"
 import Profile from './components/Pages/profile';
 import Admin from './components/Pages/Admin';
+import AdminBill from './components/Pages/AdminBill';
+import AdminCategory from './components/Pages/AdminCategory';
+import AdminCustomer from './components/Pages/AdminCustomer';
+import AdminEmployee from './components/Pages/AdminEmployee';
+import AdminInvoiceDetails from './components/Pages/AdminInvoiceDetails';
+import AdminProduct from './components/Pages/AdminProduct';
+import Login from "./components/Pages/Login";
+import Profile from "./components/Pages/profile";
+import Signup from "./components/Pages/signup";
 import Banner from './components/Banner/Banner';
 function App() {
   const location = useLocation();
