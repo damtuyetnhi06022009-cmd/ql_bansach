@@ -1,237 +1,120 @@
-.highlands-footer{
-    background-color: rgb(255, 255, 255);
-    color: #f7ede2;
-    padding: 40px 20px 60px 20px;
-    position: relative;
-    width: 100%;
+/* =========================================
+   FOOTER THEO GIAO DIỆN NOVELA
+========================================= */
+
+.novela-footer {
+    background-color: #c82323; /* Màu đỏ đô chuẩn */
+    color: #ffffff;
+    padding: 40px 20px;
+    font-family: "Times New Roman", Times, serif; /* Ép font có chân theo ảnh */
     box-sizing: border-box;
-    min-height: 300px;
-    border: 3px solid #eee8e2;
+    border-top: 2px solid #a31919;
 }
-.footer-green-strip{
-    width: 100%;
-    height: 4px;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-.footer-content{
-    max-width: 1300px;
+
+.novela-footer .footer-content {
     display: flex;
     justify-content: space-between;
+    max-width: 1200px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 40px;
-    align-items: start;
+    flex-wrap: wrap;
+    gap: 20px;
 }
-.footer-left{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+
+.novela-footer .footer-column {
+    flex: 1;
+    min-width: 200px;
 }
-.footer-logo{
-    margin-bottom: 20px;
-}
-.footer-logo-img{
-    width: 120px;
-    height: auto;
-    display: block;
-    object-fit: contain;
-    border-radius: 8px;
-    background-color: transparent;
-    box-shadow: none;
-}
-.footer-logo-circle{
-    width: 110px;
-    height: 110px;
-    background-color: white;
-    border-radius: 50%;
-    border: 2px solid #922b27;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-.footer-logo-text{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    position: relative;
-}
-.logo-top{
-    position: absolute;
-    top: 20px;
-    font-size: 9px;
+
+/* Tiêu đề các cột */
+.novela-footer .footer-title {
+    font-size: 18px;
     font-weight: bold;
-    color: #922b27;
-    letter-spacing: 1.5px;
-}
-.logo-bottom{
-    position: absolute;
-    bottom: 20px;
-    font-size: 9px;
-    font-weight: bold;
-    color: #922b27;
-    letter-spacing: 1.5px;
-}
-.logo-center{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 50%;
-    margin-top: 5px;
-}
-.logo-moutain{
-    width: 45px;
-    height: 25px;
-    background-color: #922b27;
-    position: relative;
-    clip-path: polygon(10% 100%, 30% 50%, 50% 70%, 70% 30%, 90% 100%);
-}
-.footer-copyright{
-    font-size: 12px;
-    color: white;
-    margin: 0;
-    opacity: 0.9;
-}
-.footer-middle{
-    display: grid;
-    display: flex;
-    gap:50px;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 30px;
-}
-.footer-column{
-    display: flex;
-    min-width: 150px;
-    flex-direction: column;
-}
-.footer-column-title{
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase;
     margin-bottom: 15px;
-    color: #8a7773;
+    margin-top: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
 }
-.footer-links{
-    list-style: none;
+
+/* Danh sách link */
+.novela-footer .footer-links {
+    list-style-type: none;
     padding: 0;
     margin: 0;
+    line-height: 2; /* Giãn cách dòng vừa phải */
 }
-.footer-links-li{
-    margin-bottom: 10px;
+
+.novela-footer .footer-links li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    transition: opacity 0.2s ease;
 }
-.footer-link a:hover{
-    opacity: 1;
-    color: #ffd200;
+
+.novela-footer .footer-links li a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
 }
-.footer-right{
+
+/* Phần Liên hệ (Cột 1) */
+.novela-footer .footer-contact {
+    margin-top: 35px;
+}
+
+.novela-footer .footer-contact p {
+    font-size: 14px;
+    margin: 0;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    gap: 8px;
 }
-.footer-social-icons{
+
+/* Phần Hotline (Cột 2) */
+.novela-footer .footer-hotline {
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.novela-footer .footer-hotline i {
+    font-size: 20px;
+}
+
+.novela-footer .footer-hotline span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Phần Icon Mạng xã hội (Cột 3) */
+.novela-footer .footer-social-icons {
+    margin-top: 35px;
     display: flex;
     gap: 15px;
-    margin-top: 10px;
 }
-.social-icon{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color:#7c6d6c ;
+
+.novela-footer .footer-social-icons a {
+    color: #ffffff;
+    font-size: 26px;
     text-decoration: none;
-    font-size: 18px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s ease;
 }
-.social-icon:hover{
-    transform: scale(1.1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-.footer-map{
-    width: 100%;
-    max-width: 320px;
-    margin-top: 1.25rem;
-}
-.footer-map_iframe{
-    display: block;
-    width: 100%;
-    height: 200px;
-    border: 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-}
-.footer-map_link{
-    display: inline-block;
-    margin-top: 0.5rem;
-    font-size: 12px;
-    color: #ffd200;
-    text-decoration: none;
-    opacity: 0.95;
-}
-.footer-map_link:hover{
-    text-decoration: underline;
-    opacity: 1;
-}
-.footer-chat-icon{
-    position: absolute;
-    bottom: 20px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background-color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    z-index: 10;
-    transition: transform 0.2s;
-}
-.footer-chat-icon:hover{
+
+.novela-footer .footer-social-icons a:hover {
     transform: scale(1.1);
 }
-.footer-chat-icon i{
-    font-size: 22px;
-    color: #6a4745;
-    position: relative;
-}
-.footer-chat-icon::before{
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(146, 43, 39, 0.1)0%, transparent 70%);
-    pointer-events: none;
-}
-@media (max-width:1024px){
-    .footer-content{
-        grid-template-columns: 1fr;
+
+/* Responsive: Đưa về 1 cột khi dùng điện thoại */
+@media (max-width: 768px) {
+    .novela-footer .footer-content {
+        flex-direction: column;
         gap: 30px;
     }
-    .footer-middle{
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-    @media (max-width: 760px){
-        .footer-middle{
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-        .footer-social-icons{
-            flex-wrap: wrap;
-        }
+    
+    .novela-footer .footer-contact,
+    .novela-footer .footer-hotline,
+    .novela-footer .footer-social-icons {
+        margin-top: 20px;
     }
 }

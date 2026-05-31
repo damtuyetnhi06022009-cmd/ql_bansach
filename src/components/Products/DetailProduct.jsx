@@ -33,81 +33,115 @@ const DetailProduct = () => {
         fetchProduct();
     }, [id]);
 
+    // Hàm định dạng giá tiền: 120.000 đ
+    const formatPrice = (price) => {
+        if (!price) return '0 đ';
+        const numericPrice = typeof price === 'string' 
+            ? parseFloat(price.replace(/[^\d]/g, '')) 
+            : parseFloat(price) || 0;
+        return new Intl.NumberFormat('vi-VN').format(numericPrice) + ' đ';
+    };
+
+    // Hàm xử lý nút mua hàng/thêm vào giỏ
+    const handleAddToCart = (shouldNavigate = false) => {
+        const savedCart = localStorage.getItem('cart');
+        const cart = savedCart ? JSON.parse(savedCart) : [];
+        const existingItemIndex = cart.findIndex(item => String(item.id) === String(product.id));
+        
+        if (existingItemIndex >= 0) {
+            cart[existingItemIndex].quantity += 1;
+        } else {
+            cart.push({
+                ...product,
+                quantity: 1
+            });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        window.dispatchEvent(new Event('cartUpdated'));
+
+        if (shouldNavigate) {
+            navigate('/cart');
+        } else {
+            alert('Đã thêm sản phẩm vào giỏ hàng thành công!');
+        }
+    };
+
     if (isLoading) {
-        return <div className="detail-container">Đang tải chi tiết sản phẩm..</div>;
+        return <div className="detail-page-wrapper"><div className="detail-inner-container">Đang tải chi tiết sản phẩm..</div></div>;
     }
 
     if (error) {
-        return <div className="detail-container">Lỗi: {error}</div>;
+        return <div className="detail-page-wrapper"><div className="detail-inner-container">Lỗi: {error}</div></div>;
     }
 
     if (!product) {
         return null;
     }
 
+    const productImage = product.image || 'https://via.placeholder.com/500x350';
+    
+    // Xử lý số lượng sao từ JSON (Làm tròn số và đặt fallback là 5 sao nếu rỗng)
+    const ratingNumber = Math.round(parseFloat(product.rating)) || 5;
+
     return (
-        <div className="detail-container">
-            <button className="back-button" onClick={() => navigate(-1)}>
-                ← Quay lại
-            </button>
+        <div className="detail-page-wrapper">
+            <div className="detail-inner-container">
+                
+                <button className="back-button" onClick={() => navigate(-1)}>
+                    ← Quay lại
+                </button>
 
-            <div className="detail-card">
-                <div className="detail-image">
-                    <img
-                        src={product.image || 'https://via.placeholder.com/500x350'}
-                        alt={product.name}
-                    />
-                </div>
-
-                <div className="detail-info">
-                    <h2>{product.name}</h2>
-                    <p className="detail-price">
-                        <span className="current-price">{product.currentPrice}</span>
-                        {product.originalPrice && (<span className="original-price">{product.originalPrice}</span>)}
-                        {product.discount && <span className="discount">{product.discount}</span>}
-                    </p>
-
-                    <div className="detail-info-container">
-                        <div className="info-row">
-                            <span className="info-label">Tác giả:</span>
-                            <span className="info-value author-tag">{product.author}</span>
-                        </div>
-                        <div className="info-row">
-                            <span className="info-label">Nhà xuất bản:</span>
-                            <span className="info-value publisher-tag">{product.publisher}</span>
-                        </div>
-                        <div className="info-description">
-                            <h4 className="description-title">Mô tả sản phẩm:</h4>
-                            <p className="description-text">{product.description}</p>
+                <div className="detail-card">
+                    {/* BÊN TRÁI: CHỈ GIỮ LẠI KHUNG ẢNH CHÍNH */}
+                    <div className="detail-image-section">
+                        <div className="detail-image">
+                            <img src={productImage} alt={product.name} />
                         </div>
                     </div>
 
-                    <div className="detail-meta">
-                        {product.rating && <span>⭐ {product.rating}</span>}
-                        {product.sold && <span>Đã Bán {product.sold}</span>}
+                    {/* BÊN PHẢI: THÔNG TIN CHI TIẾT SẢN PHẨM */}
+                    <div className="detail-info">
+                        <h2 className="product-title-heading">{product.name}</h2>
+                        
+                        <div className="meta-info-lines">
+                            <p className="info-line">
+                                Nhà xuất bản: <span className="info-value">{product.publisher}</span>
+                            </p>
+                            <p className="info-line">
+                                Tác giả: <span className="info-value">{product.author}</span>
+                            </p>
+                        </div>
+
+                        {/* Số sao ★ động theo trường rating từ JSON */}
+                        <div className="product-stars-rating">
+                            {[...Array(ratingNumber)].map((_, index) => (
+                                <span key={index}>★</span>
+                            ))}
+                        </div>
+
+                        <div className="detail-price-box">
+                            <span className="current-price-red">{formatPrice(product.currentPrice || product.price)}</span>
+                        </div>
+
+                        <div className="detail-action-buttons">
+                            <button className="add-to-cart-button" onClick={() => handleAddToCart(false)}>
+                                Thêm vào giỏ hàng
+                            </button>
+                            <button className="buy-now-button-red" onClick={() => handleAddToCart(true)}>
+                                Mua ngay
+                            </button>
+                        </div>
+
+                        {product.description && (
+                            <div className="info-description-box">
+                                <h4 className="description-title">Mô tả sản phẩm:</h4>
+                                <p className="description-text">{product.description}</p>
+                            </div>
+                        )}
                     </div>
-
-                    <button className="buy-now-button" onClick={() => {
-                        const savedCart = localStorage.getItem('cart');
-                        const cart = savedCart ? JSON.parse(savedCart) : [];
-                        const existingItemIndex = cart.findIndex(item => String(item.id) === String(product.id));
-                        if (existingItemIndex >= 0) {
-                            cart[existingItemIndex].quantity += 1;
-                        } else {
-                            cart.push({
-                                ...product,
-                                quantity: 1
-                            });
-                        }
-
-                        localStorage.setItem('cart', JSON.stringify(cart));
-                        window.dispatchEvent(new Event('cartUpdated'));
-
-                        navigate('/cart');
-                    }}>
-                        Mua ngay
-                    </button>
                 </div>
+
             </div>
         </div>
     );

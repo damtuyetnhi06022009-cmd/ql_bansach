@@ -1,181 +1,216 @@
-.product-list-container {
-  padding: 40px 20px;
-  background-color: #f5f5f5;
-  min-height: 500px;
+/* ================== RESET & TỔNG QUAN ================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-.product-list-layout {
-  max-width: 1300px;
-  margin: 0 auto;
-  display: flex;
-  align-items: flex-start;
-  gap: 28px;
+.product-page-wrapper {
+    background-color: #f2f2f2;
+    padding-bottom: 40px;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
 }
 
-.product-list-sidebar {
-  flex: 0 0 200px;
-  position: sticky;
-  top: 100px;
-  padding: 20px 18px;
-  background: #fff;
-  border-radius: 12px;
-  border: 1px solid #e8dfd4;
-  box-shadow: 0 2px 12px rgba(61, 43, 31, 0.06);
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
 }
 
-.product-list-sidebar__title {
-  margin: 0 0 14px;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #3d2b1f;
+.loading-state, .error-state {
+    text-align: center;
+    padding: 50px;
+    font-size: 18px;
 }
 
-.product-list-sidebar__list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* ================== PHẦN 1: FLASH SALE ================== */
+.flash-sale-section {
+    background-color: #ff976b;
+    padding: 30px 0;
+    margin-bottom: 20px;
 }
 
-.product-list-sidebar__btn {
-  width: 100%;
-  text-align: left;
-  padding: 10px 14px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #5c4a3d;
-  background: #faf8f5;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
+.flash-sale-header {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
-.product-list-sidebar__btn:hover {
-  background: #f0ebe3;
-  color: #3d2b1f;
+.flash-sale-title {
+    color: #ff3b3b;
+    font-style: italic;
+    margin: 0;
+    font-size: 24px;
 }
 
-.product-list-sidebar__btn--active {
-  background: #3d2b1f;
-  color: #fff;
-  border-color: #3d2b1f;
+.flash-sale-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: black;
 }
 
-.product-list-sidebar__btn--active:hover {
-  background: #2a1e15;
-  color: #fff;
+.flash-sale-timer {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    font-weight: bold;
 }
 
-.product-list-main {
-  flex: 1;
-  min-width: 0;
+.time-box {
+    background-color: #222;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
 }
 
-.product-list-empty {
-  margin: 0;
-  padding: 48px 20px;
-  text-align: center;
-  font-size: 1rem;
-  color: #6b5d52;
-  background: #fff;
-  border-radius: 12px;
-  border: 1px dashed #d4c4b0;
+.flash-sale-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
 }
 
-.product-list {
-  max-width: none;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  align-items: stretch;
+/* ================== PHẦN 2: DANH MỤC SẢN PHẨM ================== */
+.product-list-sidebar.horizontal-mode {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.product-list-sidebar.horizontal-mode .product-list-sidebar__title {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+}
+
+.product-list-sidebar.horizontal-mode .product-list-sidebar__list {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 12px;
+    list-style-type: none;
+}
+
+.product-list-sidebar.horizontal-mode .product-list-sidebar__btn {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 20px; 
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    color: #222;
+    transition: all 0.2s ease;
+}
+
+.product-list-sidebar.horizontal-mode .product-list-sidebar__btn:hover {
+    background-color: #f5f5f5;
+}
+
+.product-list-sidebar.horizontal-mode .product-list-sidebar__btn--active {
+    background-color: #ff6f59;
+    color: white;
+    border-color: #ff6f59;
+    font-weight: bold;
+}
+
+/* ================== PHẦN 3: XU HƯỚNG MUA SẮM ================== */
+.trending-section {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.trending-header {
+    background-color: #ffb6c1;
+    padding: 15px 20px;
+}
+
+.trending-title {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.trending-content {
+    padding: 20px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 20px 0;
+    color: #666;
+}
+
+.trending-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Giữ nguyên cấu trúc 4 cột */
+    gap: 15px;
+}
+
+/* ====== PHÂN TRANG ====== */
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.pagination-btn {
+    padding: 8px 16px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #222;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background-color: #f0f0f0;
+}
+
+.pagination-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.pagination-info {
+    font-size: 14px;
+}
+
+/* ================== RESPONSIVE CƠ BẢN ================== */
+@media (max-width: 992px) {
+    .flash-sale-grid { grid-template-columns: repeat(2, 1fr); }
+    .trending-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 768px) {
-  .product-list-layout {
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .product-list-sidebar {
-    flex: none;
-    width: 100%;
-    position: static;
-    top: auto;
-  }
-
-  .product-list-sidebar__list {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .product-list-sidebar__btn {
-    width: auto;
-  }
-
-  .product-list {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .product-list-container {
-    padding: 20px 15px;
-  }
+    .trending-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
-  .product-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1025px) {
-  .product-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.product-list-pagination {
-  max-width: none;
-  margin: 32px auto 0;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 16px 24px;
-}
-
-.product-list-pagination__btn {
-  padding: 10px 20px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #3d2b1f;
-  background: #fff;
-  border: 2px solid #c4a574;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-
-.product-list-pagination__btn:hover:not(:disabled) {
-  background: #3d2b1f;
-  color: #fff;
-  border-color: #3d2b1f;
-}
-
-.product-list-pagination__btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-.product-list-pagination__info {
-  font-size: 0.95rem;
-  color: #5c4a3d;
-  font-weight: 500;
-  min-width: 7rem;
-  text-align: center;
+@media (max-width: 576px) {
+    .flash-sale-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .trending-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    
+    .product-list-sidebar.horizontal-mode .product-list-sidebar__btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+    
+    .flash-sale-header {
+        justify-content: center;
+        text-align: center;
+    }
 }

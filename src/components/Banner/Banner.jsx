@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import './Banner.css';
+import { imageMap } from '../../utils/productImages'; 
 
-import bn1 from '../../img/bn1.png';
-import bn2 from '../../img/bn2.png';
-import bn3 from '../../img/bn3.png';
-import bn4 from '../../img/bn4.png';
-import bn6 from '../../img/bn6.png';
+const bannerKeys = Object.keys(imageMap).filter(key => key.startsWith('bn'));
 
-const banners = [bn1, bn2, bn3, bn4, bn6];
+bannerKeys.sort((a, b) => {
+    const numA = parseInt(a.replace('bn', ''), 10);
+    const numB = parseInt(b.replace('bn', ''), 10);
+    return numA - numB;
+});
+
+const banners = bannerKeys.map(key => imageMap[key]);
+
 
 const Banner = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    if (!banners || banners.length === 0) {
+        return null; 
+    }
 
     useEffect(() => {
         const interval = setInterval(() => {

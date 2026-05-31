@@ -9,6 +9,22 @@ const ProductCard = ({ product }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // ========================================================
+  // HÀM ĐỊNH DẠNG GIÁ TIỀN (Thêm dấu chấm và chữ đ)
+  // ========================================================
+  const formatPrice = (price) => {
+    if (price === undefined || price === null || price === '') return '';
+    
+    // Ép kiểu về số (loại bỏ ký tự lạ nếu có)
+    const num = Number(String(price).replace(/[^0-9]/g, '')); 
+    
+    // Nếu ép kiểu thất bại (không phải số) thì trả về chuỗi gốc
+    if (isNaN(num)) return price; 
+    
+    // Thêm dấu chấm phân cách theo chuẩn Việt Nam và thêm chữ đ
+    return num.toLocaleString('vi-VN') + ' đ'; 
+  };
+
   const handleBuy = async () => {
     setIsLoading(true);
     setError(null);
@@ -24,7 +40,6 @@ const ProductCard = ({ product }) => {
         throw new Error('Sản phẩm không tồn tại');
       }
       
-      // SỬA: Truyền đầy đủ dữ liệu sang DetailProduct, giữ nguyên imageKey
       navigate(`/product/${product.id}`, {
         state: { product: { ...matchedProduct, imageKey: product.imageKey } }
       });
@@ -47,14 +62,14 @@ const ProductCard = ({ product }) => {
       <h3 className="product-name">{product.name}</h3>
 
       <div className="product-pricing">
-        {/* SỬA: Bỏ .toLocaleString() để không bị lỗi crash chuỗi thành số */}
+        {/* SỬA: Đã bọc hàm formatPrice để tự động thêm dấu chấm */}
         <span className="current-price">
-          {product.currentPrice}
+          {formatPrice(product.currentPrice)}
         </span>
         <div className="original-price-section">
           {product.originalPrice && (
             <span className="original-price">
-              {product.originalPrice}
+              {formatPrice(product.originalPrice)}
             </span>
           )}          
           {product.discount && <span className="discount">{product.discount}</span>}
@@ -62,7 +77,7 @@ const ProductCard = ({ product }) => {
       </div>
 
       <div className="product-rating-sales">
-        <span className="rating">⭐ {product.rating}</span>
+        <span className="rating">★ {product.rating}</span>
         <span className="sales">Đã bán {product.sold}</span>
       </div>
 

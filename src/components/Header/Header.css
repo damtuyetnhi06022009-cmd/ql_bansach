@@ -1,123 +1,222 @@
-.organic-header {
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+.novela-header {
     width: 100%;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    font-family: Arial, sans-serif;
+    border-bottom: 1px solid #e0e0e0;
 }
 
-.organic-container {
-    display: flex;
-    flex-direction: column; 
+.top-banner {
+    width: 100%;
+    height: 50px; 
+    background-color: #e30019; 
+}
+
+.header-main {
+    background-color: #ffffff;
+    padding: 15px 0;
+}
+
+.header-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 10px 20px;
-}
-
-.header-top-bar {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding-bottom: 10px;
+    padding: 0 20px;
 }
 
-.top-left-spacer {
-    flex: 1; 
-}
-
-.organic-logo {
-    cursor: pointer;
-    flex: 1;
+.header-left {
     display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.brand-logo {
+    cursor: pointer;
+}
+
+.brand-logo img {
+    width: 120px;
+    object-fit: contain;
+}
+
+.menu-toggle {
+    font-size: 20px;
+    color: #555;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.organic-logo img {
-    height: 50px; /* Chỉnh lại kích thước logo bạn muốn */
-    width: auto;
-}
-
-.organic-actions {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-    align-items: center;
-}
-
-.action-item {
-    cursor: pointer;
-    font-size: 1.2rem;
+.menu-toggle:hover {
+    background-color: #f2f2f2;
     color: #333;
-    position: relative;
 }
 
-.cart-pill {
+.header-center {
+    flex: 1;
+    max-width: 800px;
+    margin: 0 40px;
+}
+
+.search-bar {
     display: flex;
     align-items: center;
-    gap: 5px;
-    background: #f5f5f5;
-    padding: 5px 12px;
-    border-radius: 20px;
+    border: 1px solid #777;
+    border-radius: 25px;
+    padding: 8px 15px;
+    background-color: transparent; 
 }
 
-.cart-count {
-    font-size: 0.9rem;
+.search-bar .search-icon {
+    color: #777;
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+    background-color: transparent; 
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.action-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    color: #555;
+    position: relative;
+    transition: color 0.2s;
+}
+
+.action-box:hover {
+    color: #e30019;
+}
+
+.action-box i {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.action-box span {
+    font-size: 12px;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: #e30019;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 10px;
     font-weight: bold;
 }
 
-/* Hàng dưới (Menu) */
-.organic-nav {
-    border-top: 1px solid #eee; /* Đường kẻ ngang phân cách */
-    padding-top: 10px;
+/* --- LỚP PHỦ MỜ NỀN (BACKDROP OVERLAY) --- */
+.novela-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Nền tối mờ */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng mờ dần mượt mà */
+    z-index: 998; /* Nằm dưới menu chính nhưng trên nội dung khác */
 }
 
-.organic-menu {
-    display: flex;
-    justify-content: center; /* Căn giữa các chữ menu */
-    gap: 40px;
+.novela-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- MENU ĐIỀU HƯỚNG MƯỢT MÀ (TRƯỢT RA TỪ BÊN TRÁI) --- */
+.novela-nav {
+    position: fixed; /* Cố định vị trí */
+    top: 0;
+    left: 0;
+    width: 250px; /* Chiều rộng bảng menu dọc */
+    height: 100%;
+    background-color: #ffffff; /* Nền trắng */
+    transform: translateX(-100%); /* Bắt đầu ẩn hoàn toàn ở bên trái */
+    transition: transform 0.3s ease-in-out; /* Hiệu ứng trượt mượt mà */
+    z-index: 999; /* Nằm trên cùng */
+    overflow-y: auto; /* Thêm cuộn nếu menu quá dài */
+}
+
+.novela-nav.active {
+    transform: translateX(0); /* Trượt vào vị trí chính */
+}
+
+.nav-container {
+    padding: 60px 20px; /* Padding cho bảng menu dọc */
+}
+
+/* ... (Giữ nguyên các CSS của .top-banner, .header-main, .search-bar, .action-box...) */
+
+/* --- MENU XỔ XUỐNG DẠNG NGANG (SMOOTH DROPDOWN) --- */
+.novela-nav-dropdown {
+    width: 100%;
+    background-color: #fafafa;
+    border-top: 1px solid #eaeaea;
+    
+    /* Thiết lập ẩn mặc định để làm hiệu ứng trượt */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    
+    /* Hiệu ứng chuyển động (transition) mượt mà */
+    transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
+}
+
+/* Khi isMenuOpen = true, thêm class .open để xổ menu ra */
+.novela-nav-dropdown.open {
+    max-height: 100px; /* Đủ độ cao để chứa các chữ */
+    opacity: 1;
+    border-bottom: 1px solid #eaeaea;
+    box-shadow: 0 4px 6px -6px #222; /* Thêm bóng đổ nhẹ phía dưới cho có chiều sâu */
+}
+
+/* Danh sách nằm ngang */
+.nav-menu {
     list-style: none;
     margin: 0;
-    padding: 10px 0;
+    padding: 15px 0; /* Khoảng cách trên dưới */
+    display: flex;
+    justify-content: center; /* Canh giữa màn hình */
+    gap: 40px; /* Khoảng cách giữa các chữ */
 }
 
-.organic-menu li a {
+.nav-menu li a {
     text-decoration: none;
-    color: #555;
-    font-weight: 500;
-    transition: color 0.3s;
-    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 8px 16px;
+    border-radius: 20px; /* Tạo khung nền bo tròn khi hover */
+    transition: all 0.2s ease;
 }
 
-.organic-menu li a:hover {
-    color: #2e7d32; /* Màu xanh lá cây hoặc màu bạn chọn */
-}
-
-/* Mobile Responsive */
-.mobile-toggle {
-    display: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    .mobile-toggle {
-        display: block;
-    }
-    
-    .organic-nav {
-        display: none;
-    }
-    
-    .organic-nav.active {
-        display: block;
-    }
-    
-    .organic-menu {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
+/* Hiệu ứng khi di chuột vào từng chữ trong menu */
+.nav-menu li a:hover {
+    color: #e30019;
+    background-color: #ffeff0; /* Nền hồng nhạt để nổi bật chữ đỏ */
 }

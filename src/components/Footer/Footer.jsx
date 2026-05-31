@@ -1,99 +1,67 @@
 import React from 'react';
 import './Footer.css';
-import logo from '../../img/logo.png';
+import logo from '../../img/logo.png'; 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Footer = () => {
     return (
-        <footer className="highlands-footer">
-            <div className="footer-green-strip"></div>
+        <footer className="novela-footer">
             <div className="footer-content">
-                <div className="footer-left">
-                    <div className="footer-logo">
-                        <img src={logo} alt="Highlands Coffee" className="footer-logo-img" />
-                    </div>
-                    <p className="footer-copyright">
-                        ©2025 Novela. All rights reserved
-                    </p>
-                </div>
-
-                <div className="footer-middle">
-                    <div className="footer-column">
-                        <h3 className="footer-column-title">DỊCH VỤ</h3>
-                        <ul className="footer-links">
-                            <li><a href="/origin">Điều khoản sử dụng</a></li>
-                            <li><a href="/services">Chính sách bảo mật thông tin</a></li>
-                            <li><a href="/careers">Giới thiệu Novela</a></li>
-                        </ul>
-                    </div>
-
-                    <div className="footer-column">
-                        <h3 className="footer-column-title">HỖ TRỢ</h3>
-                        <ul className="footer-links">
-                            <li>
-                                <a href="/find-store">Chính sách đổi - trả</a>
-                                <br />
-                                <a href="/find-store">Chính sách bảo hành</a>
-                                <br />
-                                <a href="/find-store">Chính sách vận chuyển</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div className="footer-column">
-                        <h3 className="footer-column-title">LIÊN HỆ</h3>
-                        <ul className="footer-links">
-                             <li>
-                                <a href="/find-store"> 60-62 Lê Lợi, Q.1, TP. HCM</a>
-                                <br />
-                                <a href="/find-store"> cskh@novela.com.vn</a>
-                                <br />
-                                <a href="/find-store"> 0965441669</a>
-                            </li>
-                        </ul>
+                
+                {/* --- CỘT 1: DỊCH VỤ --- */}
+                <div className="footer-column">
+                    <h3 className="footer-title">DỊCH VỤ</h3>
+                    <ul className="footer-links">
+                        <li><a href="/origin">Điều khoản sử dụng</a></li>
+                        <li><a href="/services">Chính sách bảo mật thông tin cá nhân</a></li>
+                        <li><a href="/services">Chính sách bảo mật thanh toán</a></li>
+                        <li><a href="/careers">Giới thiệu Novela</a></li>
+                    </ul>
+                    <div className="footer-contact">
+                        <h3 className="footer-title">LIÊN HỆ</h3>
+                        <p><i className="fas fa-map-marker-alt"></i> 60-62 Lê Lợi, Q.1, TP. HCM</p>
                     </div>
                 </div>
 
-                <div className="footer-right">
-                    <h3 className="footer-column-title">THEO DÕI CHÚNG TÔI</h3>
+                {/* --- CỘT 2: HỖ TRỢ --- */}
+                <div className="footer-column">
+                    <h3 className="footer-title">HỖ TRỢ</h3>
+                    <ul className="footer-links">
+                        <li><a href="/find-store">Chính sách đổi - trả - hoàn tiền</a></li>
+                        <li><a href="/find-store">Chính sách bảo hành</a></li>
+                        <li><a href="/find-store">Chính sách vận chuyển</a></li>
+                    </ul>
+                    <div className="footer-hotline">
+                        <i className="fas fa-phone-alt"></i>
+                        <span>1900234567</span>
+                    </div>
+                </div>
+
+                {/* --- CỘT 3: TÀI KHOẢN CỦA TÔI --- */}
+                <div className="footer-column">
+                    <h3 className="footer-title">TÀI KHOẢN CỦA TÔI</h3>
+                    <ul className="footer-links">
+                        <li><a href="/find-store">Đăng nhập/tạo tài khoản mới</a></li>
+                        <li><a href="/find-store">Thay đổi địa chỉ khách hàng</a></li>
+                        <li><a href="/find-store">Chi tiết tài khoản</a></li>
+                        <li><a href="/find-store">Lịch sử mua hàng</a></li>
+                    </ul>
                     <div className="footer-social-icons">
-                        <a href="https://facebook.com" className="social-icon" aria-label="Facebook">
-                            <i className="fab fa-facebook-f"></i>
+                        <a href="https://facebook.com" aria-label="Facebook">
+                            <i className="fab fa-facebook-square"></i>
                         </a>
-                        <a href="https://instagram.com" className="social-icon" aria-label="Instagram">
+                        <a href="https://instagram.com" aria-label="Instagram">
                             <i className="fab fa-instagram"></i>
                         </a>
-                        <a href="https://youtube.com" className="social-icon" aria-label="YouTube">
+                        <a href="https://youtube.com" aria-label="YouTube">
                             <i className="fab fa-youtube"></i>
                         </a>
-                        <a href="https://tiktok.com" className="social-icon" aria-label="TikTok">
-                            <i className="fab fa-tiktok"></i>
-                        </a>
-                    </div>
-
-                    <div className="footer-map">
-                        <iframe
-                            title="Bản đồ địa điểm Galaxy Cafe"
-                            className="footer-map__iframe"
-                            src="https://www.google.com/maps?q=10.743902,106.6340446&z=17&output=embed&hl=vi"
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                            allowFullScreen
-                        />
-                        <a 
-                            className="footer-map__link"
-                            href="https://maps.app.goo.gl/6RuUrqKaYFSpPe57"
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                        >
-                            Mở trong Google Maps
+                        <a href="https://pinterest.com" aria-label="Pinterest">
+                            <i className="fab fa-pinterest"></i>
                         </a>
                     </div>
                 </div>
-            </div>
-
-            <div className="footer-chat-icon" title="Chat với chúng tôi">
-                <i className="fas fa-comment-dots"></i>
+                
             </div>
         </footer>
     );
