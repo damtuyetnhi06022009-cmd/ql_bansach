@@ -14,7 +14,6 @@ import AdminCustomer from './components/Pages/AdminCustomer';
 import AdminEmployee from './components/Pages/AdminEmployee';
 import AdminInvoiceDetails from './components/Pages/AdminInvoiceDetails';
 import AdminProduct from './components/Pages/AdminProduct';
-import Signup from "./components/Pages/Signup";
 import Banner from './components/Banner/Banner';
 function App() {
   const location = useLocation();
