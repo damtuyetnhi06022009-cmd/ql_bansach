@@ -1,17 +1,17 @@
 .novela-header {
     width: 100%;
     font-family: Arial, sans-serif;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #eAD2A8; /* Thay sang màu nâu vàng nhạt */
 }
 
 .top-banner {
     width: 100%;
     height: 50px; 
-    background-color: #e30019; 
+    background-color: #E5A93B; /* Vàng mật ong ấm, sang trọng hơn */
 }
 
 .header-main {
-    background-color: #ffffff;
+    background-color: #FFFDF6; /* Trắng kem ấm áp */
     padding: 15px 0;
 }
 
@@ -41,8 +41,7 @@
 
 .menu-toggle {
     font-size: 20px;
-    color: #555;
-    cursor: pointer;
+    color: #3D311D; /* Nâu đậm thay cho màu đen */
     width: 40px;
     height: 40px;
     display: flex;
@@ -54,8 +53,8 @@
 }
 
 .menu-toggle:hover {
-    background-color: #f2f2f2;
-    color: #333;
+    background-color: #FFF3CD; /* Nền vàng nhạt khi hover */
+    color: #E5A93B; /* Chuyển icon sang vàng ấm */
 }
 
 .header-center {
@@ -67,14 +66,14 @@
 .search-bar {
     display: flex;
     align-items: center;
-    border: 1px solid #777;
+    border: 1px solid #C4A46A; /* Bo viền màu vàng đất thanh lịch */
     border-radius: 25px;
     padding: 8px 15px;
     background-color: transparent; 
 }
 
 .search-bar .search-icon {
-    color: #777;
+    color: #3D311D;
     margin-right: 10px;
     font-size: 14px;
 }
@@ -84,8 +83,13 @@
     outline: none;
     width: 100%;
     font-size: 14px;
-    color: #333;
+    color: #3D311D;
     background-color: transparent; 
+}
+
+/* Đổi màu placeholder chữ trong ô tìm kiếm cho hợp tone */
+.search-bar input::placeholder {
+    color: #9E8A6B;
 }
 
 .header-right {
@@ -99,13 +103,13 @@
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    color: #555;
+    color: #C47B00; /* Vàng hổ phách đậm để nhìn rõ chữ */
     position: relative;
     transition: color 0.2s;
 }
 
 .action-box:hover {
-    color: #e30019;
+    color: #E5A93B; /* Vàng sáng hơn khi hover */
 }
 
 .action-box i {
@@ -121,7 +125,7 @@
     position: absolute;
     top: -5px;
     right: -10px;
-    background-color: #e30019;
+    background-color: #D44900; /* Đổi từ đỏ tươi sang đỏ cam cháy, rất hợp với tone vàng */
     color: white;
     border-radius: 50%;
     padding: 2px 6px;
@@ -129,18 +133,17 @@
     font-weight: bold;
 }
 
-/* --- LỚP PHỦ MỜ NỀN (BACKDROP OVERLAY) --- */
 .novela-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Nền tối mờ */
+    background-color: rgba(61, 49, 29, 0.4); /* Nền mờ nghiêng nhẹ sang tone nâu ấm */
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Hiệu ứng mờ dần mượt mà */
-    z-index: 998; /* Nằm dưới menu chính nhưng trên nội dung khác */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 998;
 }
 
 .novela-overlay.active {
@@ -148,75 +151,67 @@
     visibility: visible;
 }
 
-/* --- MENU ĐIỀU HƯỚNG MƯỢT MÀ (TRƯỢT RA TỪ BÊN TRÁI) --- */
 .novela-nav {
-    position: fixed; /* Cố định vị trí */
+    position: fixed;
     top: 0;
     left: 0;
-    width: 250px; /* Chiều rộng bảng menu dọc */
+    width: 250px;
     height: 100%;
-    background-color: #ffffff; /* Nền trắng */
-    transform: translateX(-100%); /* Bắt đầu ẩn hoàn toàn ở bên trái */
-    transition: transform 0.3s ease-in-out; /* Hiệu ứng trượt mượt mà */
-    z-index: 999; /* Nằm trên cùng */
-    overflow-y: auto; /* Thêm cuộn nếu menu quá dài */
+    background-color: #FFFDF3; /* Màu trắng kem nhạt */
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 999;
+    overflow-y: auto;
 }
 
 .novela-nav.active {
-    transform: translateX(0); /* Trượt vào vị trí chính */
+    transform: translateX(0);
 }
 
 .nav-container {
-    padding: 60px 20px; /* Padding cho bảng menu dọc */
+    padding: 60px 20px;
 }
-
-/* ... (Giữ nguyên các CSS của .top-banner, .header-main, .search-bar, .action-box...) */
 
 /* --- MENU XỔ XUỐNG DẠNG NGANG (SMOOTH DROPDOWN) --- */
 .novela-nav-dropdown {
     width: 100%;
-    background-color: #fafafa;
-    border-top: 1px solid #eaeaea;
-    
-    /* Thiết lập ẩn mặc định để làm hiệu ứng trượt */
+    background-color: #FFF9E6; /* Màu nền menu ngang vàng kem nhẹ dịu mắt */
+    border-top: 1px solid #F1E2C3;    
     max-height: 0;
     opacity: 0;
-    overflow: hidden;
-    
-    /* Hiệu ứng chuyển động (transition) mượt mà */
+    overflow: hidden;    
     transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, padding 0.3s ease-in-out;
 }
 
-/* Khi isMenuOpen = true, thêm class .open để xổ menu ra */
 .novela-nav-dropdown.open {
-    max-height: 100px; /* Đủ độ cao để chứa các chữ */
+    max-height: 100px;
     opacity: 1;
-    border-bottom: 1px solid #eaeaea;
-    box-shadow: 0 4px 6px -6px #222; /* Thêm bóng đổ nhẹ phía dưới cho có chiều sâu */
+    border-bottom: 1px solid #F1E2C3;
+    box-shadow: 0 4px 10px -6px rgba(94, 76, 45, 0.3); /* Đổ bóng tone nâu nhẹ */
 }
 
 /* Danh sách nằm ngang */
 .nav-menu {
     list-style: none;
     margin: 0;
-    padding: 15px 0; /* Khoảng cách trên dưới */
+    padding: 15px 0;
     display: flex;
-    justify-content: center; /* Canh giữa màn hình */
-    gap: 40px; /* Khoảng cách giữa các chữ */
+    justify-content: center;
+    gap: 40px;
 }
 
 .nav-menu li a {
     text-decoration: none;
-    color: #333;
+    color: #51422A; /* Màu chữ nâu gỗ sang trọng */
     font-weight: 600;
     font-size: 15px;
     padding: 8px 16px;
-    border-radius: 20px; /* Tạo khung nền bo tròn khi hover */
+    border-radius: 20px;
     transition: all 0.2s ease;
 }
 
 /* Hiệu ứng khi di chuột vào từng chữ trong menu */
 .nav-menu li a:hover {
-    color: #e30019;
-    background-color: #ffeff0; /* Nền hồng nhạt để nổi bật chữ đỏ */
+    color: #C47B00; /* Chuyển chữ sang vàng đậm */
+    background-color: #FFF3CD; /* Nền vàng nhạt đồng bộ (Thay thế hoàn toàn cho màu hồng cũ) */
 }

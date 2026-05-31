@@ -1,14 +1,14 @@
 /* =========================================
-   FOOTER THEO GIAO DIỆN NOVELA
+    FOOTER THEO GIAO DIỆN NOVELA - TONE VÀNG SANG TRỌNG
 ========================================= */
 
 .novela-footer {
-    background-color: #c82323; /* Màu đỏ đô chuẩn */
-    color: #ffffff;
+    background-color: #3d2b1d; /* Đổi từ đỏ đô sang màu nâu gỗ đậm (cực kỳ sang và tôn tone vàng) */
+    color: #FFFDF3; /* Chữ màu trắng kem nhạt giúp dịu mắt hơn trắng tinh */
     padding: 40px 20px;
-    font-family: "Times New Roman", Times, serif; /* Ép font có chân theo ảnh */
+    font-family: "Times New Roman", Times, serif; 
     box-sizing: border-box;
-    border-top: 2px solid #a31919;
+    border-top: 3px solid #E5A93B; /* Đường viền trên màu vàng mật ong làm điểm nhấn */
 }
 
 .novela-footer .footer-content {
@@ -34,7 +34,7 @@
     font-family: Arial, Helvetica, sans-serif;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #ffffff;
+    color: #E5A93B; /* Tiêu đề đổi sang màu vàng mật ong để làm nổi bật các phân mục */
 }
 
 /* Danh sách link */
@@ -42,19 +42,20 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
-    line-height: 2; /* Giãn cách dòng vừa phải */
+    line-height: 2; 
 }
 
 .novela-footer .footer-links li a {
-    color: #ffffff;
+    color: #FFE6B3; /* Màu link mặc định là vàng kem nhạt */
     text-decoration: none;
     font-size: 14px;
-    transition: opacity 0.2s ease;
+    transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .novela-footer .footer-links li a:hover {
     text-decoration: underline;
-    opacity: 0.8;
+    color: #FFFDF3; /* Khi hover link sẽ sáng rực lên màu trắng kem */
+    opacity: 1;
 }
 
 /* Phần Liên hệ (Cột 1) */
@@ -68,6 +69,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    color: #FFE6B3;
 }
 
 /* Phần Hotline (Cột 2) */
@@ -76,6 +78,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    color: #E5A93B; /* Cụm hotline chuyển sang màu vàng nhấn để kích thích cuộc gọi */
 }
 
 .novela-footer .footer-hotline i {
@@ -95,14 +98,15 @@
 }
 
 .novela-footer .footer-social-icons a {
-    color: #ffffff;
+    color: #FFE6B3; /* Icon mạng xã hội màu vàng kem dịu mắt */
     font-size: 26px;
     text-decoration: none;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .novela-footer .footer-social-icons a:hover {
     transform: scale(1.1);
+    color: #E5A93B; /* Hover vào icon sẽ đổi sang vàng mật ong sáng */
 }
 
 /* Responsive: Đưa về 1 cột khi dùng điện thoại */

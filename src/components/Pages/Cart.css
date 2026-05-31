@@ -1,6 +1,6 @@
-/* Bao bọc toàn bộ trang giỏ hàng với màu nền xám nhạt */
+/* Bao bọc toàn bộ trang giỏ hàng với màu nền trắng kem ấm áp */
 .cart-page-wrapper {
-    background-color: #e9e9e9;
+    background-color: #FFFDF6; /* Đồng bộ với màu nền :root và body toàn trang */
     padding: 30px 20px;
     font-family: Arial, sans-serif;
     min-height: 100vh;
@@ -14,18 +14,19 @@
     width: 100%;
 }
 
-/* Tiêu đề chính GIỎ HÀNG */
+/* Tiêu đề chính GIỎ HÀNG chuyển sang màu nâu gỗ */
 .cart-main-title {
     font-size: 22px;
-    font-weight: normal;
-    color: #222;
+    font-weight: bold;
+    color: #3D311D; /* Màu nâu gỗ đậm chủ đạo */
     margin-bottom: 20px;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 .cart-main-title .title-count {
     font-size: 15px;
     text-transform: none;
-    color: #555;
+    color: #7A6B53; /* Màu nâu nhạt hơn cho số lượng */
 }
 
 /* Layout chia 2 phần Flexbox */
@@ -46,14 +47,16 @@
     flex: 1.2; /* Phần thanh toán gọn gàng bên phải */
 }
 
-/* Thanh Header phụ (Chọn tất cả) */
+/* Thanh Header phụ (Chọn tất cả) - Viền vàng kem nhẹ */
 .cart-select-all-bar {
     background-color: #ffffff;
     padding: 12px 15px;
-    border-radius: 4px;
+    border-radius: 6px;
+    border: 1px solid #F1E2C3;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 4px 10px rgba(61, 49, 29, 0.03);
 }
 
 .checkbox-container {
@@ -61,12 +64,13 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    color: #51422A; /* Chữ màu nâu gỗ */
 }
 
 .bar-right-labels {
     display: flex;
     gap: 65px;
-    color: #444;
+    color: #7A6B53;
     font-size: 14px;
     padding-right: 85px;
 }
@@ -75,11 +79,13 @@
 .cart-item-card {
     background-color: #ffffff;
     padding: 15px;
-    border-radius: 4px;
+    border-radius: 6px;
+    border: 1px solid #F1E2C3; /* Viền be nhẹ thay cho xám */
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(61, 49, 29, 0.04);
 }
 
 .card-left-info {
@@ -88,17 +94,20 @@
     gap: 15px;
 }
 
+/* Tinh chỉnh checkbox cho hợp tone vàng khi trình duyệt render */
 .item-checkbox {
     width: 16px;
     height: 16px;
     cursor: pointer;
+    accent-color: #E5A93B; /* Ép màu ô checkbox thành màu vàng mật ong */
 }
 
 .item-image-box img {
     width: 65px;
     height: 85px;
     object-fit: cover;
-    border: 1px solid #ddd;
+    border: 1px solid #C4A46A; /* Đổi viền ảnh sang màu vàng đất */
+    border-radius: 4px;
 }
 
 .item-text-details {
@@ -109,15 +118,14 @@
 
 .item-name-heading {
     font-size: 15px;
-    font-weight: normal;
+    font-weight: 500;
     margin: 0;
-    color: #333;
+    color: #3D311D; /* Chữ tên sản phẩm màu nâu đậm */
 }
 
 .item-unit-price {
     font-size: 14px;
-    color: #333;
-    margin: 0;
+    color: #7A6B53;
 }
 
 /* Khu vực hành động bên phải thẻ */
@@ -127,14 +135,13 @@
     gap: 35px;
 }
 
-/* Bộ chọn số lượng < 1 > ô vuông */
-/* Bộ chọn số lượng tinh chỉnh vuông vắn và liền mạch */
+/* Bộ chọn số lượng tinh chỉnh vuông vắn hợp tone */
 .custom-quantity-picker {
     display: flex;
     align-items: center;
-    border: 1px solid #c1c1c1;
+    border: 1px solid #C4A46A; /* Đổi sang viền vàng đất */
     border-radius: 4px;
-    height: 30px; /* Chiều cao cố định chuẩn */
+    height: 30px; 
     overflow: hidden;
     background-color: #ffffff;
 }
@@ -142,12 +149,12 @@
 .qty-btn {
     background: none;
     border: none;
-    width: 30px; /* Tạo thành khối vuông 30x30 */
+    width: 30px; 
     height: 100%;
     cursor: pointer;
     font-size: 16px;
     font-weight: normal;
-    color: #555;
+    color: #51422A;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -155,7 +162,7 @@
 }
 
 .qty-btn:hover {
-    background-color: #f2f2f2; /* Hiệu ứng hover xám nhẹ cực mượt */
+    background-color: #FFF3CD; /* Hover vào nút cộng trừ ra màu vàng nhạt cực êm */
 }
 
 .qty-number {
@@ -163,37 +170,45 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    width: 40px; /* Độ rộng vừa vặn cho số lượng hiển thị */
+    width: 40px; 
     font-size: 14px;
-    color: #333;
-    border-left: 1px solid #c1c1c1;
-    border-right: 1px solid #c1c1c1;
+    color: #3D311D;
+    border-left: 1px solid #C4A46A;
+    border-right: 1px solid #C4A46A;
     background-color: #ffffff;
     font-weight: 500;
 }
 
-/* Giá tiền đỏ đậm */
+/* Giá tiền đổi từ đỏ tươi sang màu đỏ cam cháy (như Cart Badge và nút lỗi) */
 .item-total-red-text {
     font-size: 16px;
     font-weight: bold;
-    color: #d32f2f;
+    color: #D44900; /* Đỏ cam cháy sang trọng và đồng bộ */
     min-width: 90px;
     text-align: right;
 }
 
-/* Nút xóa */
+/* Nút xóa đổi màu icon sang nâu gỗ, hover ra vàng mật ong */
 .trash-delete-btn {
     background: none;
     border: none;
+    color: #7A6B53;
     cursor: pointer;
     padding: 5px;
+    transition: color 0.2s;
+}
+
+.trash-delete-btn:hover {
+    color: #D44900; /* Hover nút xóa chuyển sang đỏ cam */
 }
 
 /* HỘP TỔNG TIỀN BÊN PHẢI */
 .total-summary-box {
     background-color: #ffffff;
     padding: 15px;
-    border-radius: 4px;
+    border-radius: 6px;
+    border: 1px solid #F1E2C3;
+    box-shadow: 0 4px 15px rgba(61, 49, 29, 0.04);
 }
 
 .summary-row-top {
@@ -206,38 +221,49 @@
 .summary-label-text {
     font-size: 18px;
     font-weight: bold;
-    color: #222;
+    color: #3D311D;
 }
 
+/* Tổng tiền hóa đơn dùng màu đỏ cam cháy rực rỡ */
 .summary-total-value-red {
     font-size: 20px;
     font-weight: bold;
-    color: #d32f2f;
+    color: #D44900;
 }
 
-.checkout-button-wrapper {
-    background-color: #e5e5e5;
-    padding: 8px;
-    border-radius: 4px;
-}
 
+
+/* Nút bấm thanh toán "Lột xác" sang màu Vàng Mật Ong nổi bật */
 .gray-payment-btn {
     width: 100%;
-    background-color: #e0e0e0;
-    color: #222;
-    border: 1px solid #aaa;
-    padding: 8px;
+    background-color: #E5A93B; /* Vàng mật ong chủ đạo rực rỡ */
+    color: #ffffff; /* Chữ trắng in đậm */
+    font-weight: bold;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px;
     font-size: 15px;
     cursor: pointer;
-    border-radius: 2px;
-}
-.gray-payment-btn:hover {
-    background-color: #d5d5d5;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(229, 169, 59, 0.2);
+    transition: background-color 0.2s, transform 0.1s;
 }
 
+.gray-payment-btn:hover {
+    background-color: #C47B00; /* Vàng đậm hơn khi hover kích thích hành động */
+}
+
+.gray-payment-btn:active {
+    transform: scale(0.99);
+}
+
+/* Khi giỏ hàng trống */
 .cart-empty {
     text-align: center;
-    background: #fff;
+    background: #ffffff;
     padding: 40px;
-    border-radius: 4px;
+    border-radius: 6px;
+    border: 1px solid #F1E2C3;
+    color: #7A6B53;
 }
