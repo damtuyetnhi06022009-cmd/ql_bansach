@@ -15,6 +15,7 @@ import AdminEmployee from './components/Pages/AdminEmployee';
 import AdminInvoiceDetails from './components/Pages/AdminInvoiceDetails';
 import AdminProduct from './components/Pages/AdminProduct';
 import Banner from './components/Banner/Banner';
+import Signup from './components/Pages/Signup';
 function App() {
   const location = useLocation();
   const hideChrome =
