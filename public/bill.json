@@ -1,0 +1,11 @@
+{
+    "id": "HD0001",
+    "date": "2025-01-10",
+    "employeeId": "NV001",
+    "customerId": "KH001",
+    "total": 1250000,
+    "status": "Đã thanh toán",
+    "paymentMethod": "Tiền mặt",
+    "discount": 50000,
+    "note": "Khách mua tại cửa hàng"
+  }

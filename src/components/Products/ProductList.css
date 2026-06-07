@@ -1,243 +1,189 @@
-/* ================== RESET & TỔNG QUAN ================== */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-.product-page-wrapper {
-    background-color: #FFFDF6; /* Ép đồng bộ nền kem ấm áp toàn trang, bỏ xám lạnh */
-    color: #3D311D;           /* Màu chữ chủ đạo nâu gỗ đậm */
-    padding-bottom: 40px;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-}
-
-.container {
+.product-list-container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.loading-state, .error-state {
-    text-align: center;
-    padding: 50px;
-    font-size: 18px;
-    color: #7A6B53;
-}
-
-/* ================== PHẦN 1: FLASH SALE (TONE VÀNG MẬT ONG) ================== */
-.flash-sale-section {
-    background-color: #dd511a; /* Đổi từ màu cam neon sang màu vàng mật ong chủ đạo sang trọng */
-    padding: 30px 0;
-    margin-bottom: 20px;
-    border-radius: 8px;
-}
-
-.flash-sale-header {
-    background-color: #ffffff;
-    border: 1px solid #F1E2C3;
-    border-radius: 8px;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-    box-shadow: 0 4px 10px rgba(61, 49, 29, 0.05);
-}
-
-.flash-sale-title {
-    color: #D44900; /* Đổi từ đỏ tươi sang đỏ cam cháy rực rỡ để kích thích mua sắm */
-    font-style: italic;
-    margin: 0;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.flash-sale-text {
-    font-size: 14px;
-    font-weight: bold;
-    color: #3D311D; /* Thay đổi chữ đen thành chữ nâu gỗ đậm */
-}
-
-.flash-sale-timer {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    font-weight: bold;
-}
-
-.time-box {
-    background-color: #3D311D; /* Đổi khối đen của đồng hồ sang màu nâu gỗ đậm */
-    color: #FFFDF3;            /* Chữ trắng kem nhạt */
-    padding: 4px 8px;
-    border-radius: 4px;
-}
-
-.flash-sale-grid {
+.product-list-layout {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding: 0 15px; /* Tạo khoảng thở nhẹ cho các thẻ card sản phẩm bên trong */
+    grid-template-columns: 250px 1fr;
+    gap: 30px;
 }
 
-/* ================== PHẦN 2: DANH MỤC SẢN PHẨM (TABS HORIZONTAL) ================== */
-.product-list-sidebar.horizontal-mode {
-    background-color: #ffffff;
-    padding: 20px;
-    border: 1px solid #F1E2C3; /* Thay viền xám bằng viền be vàng nhạt */
-    border-radius: 8px;
-    margin-bottom: 20px;
-    width: 100%;
-    box-shadow: 0 4px 15px rgba(61, 49, 29, 0.03);
+.sidebar-inner {
+    position: sticky;
+    top: 20px;
+    background: #ffffff;
+    border: 2px solid #f9d1d1;
+    border-radius: 20px;
+    padding: 25px;
 }
 
-.product-list-sidebar.horizontal-mode .product-list-sidebar__title {
-    margin: 0 0 15px 0;
-    font-size: 16px;
-    color: #3D311D; /* Tiêu đề danh mục màu nâu đậm */
-    font-weight: bold;
-}
-
-.product-list-sidebar.horizontal-mode .product-list-sidebar__list {
+.sidebar-header-mobile {
     display: flex;
-    flex-wrap: wrap; 
-    gap: 12px;
-    list-style-type: none;
-}
-
-/* Các nút danh mục khi ở trạng thái bình thường */
-.product-list-sidebar.horizontal-mode .product-list-sidebar__btn {
-    padding: 10px 20px;
-    border: 1px solid #C4A46A; /* Đổi sang màu viền vàng đất */
-    border-radius: 20px; 
-    background-color: #ffffff;
+    justify-content: space-between;
+    align-items: center;
     cursor: pointer;
-    font-size: 14px;
-    color: #51422A; /* Màu chữ nâu vừa */
-    transition: all 0.2s ease;
+    user-select: none;
 }
 
-.product-list-sidebar.horizontal-mode .product-list-sidebar__btn:hover {
-    background-color: #FFF3CD; /* Hover vào đổi sang màu vàng kem nhạt */
-    color: #C47B00;            /* Chữ chuyển vàng đậm */
-    border-color: #E5A93B;
-}
-
-/* Nút danh mục khi đang được Chọn (Active) */
-.product-list-sidebar.horizontal-mode .product-list-sidebar__btn--active {
-    background-color: #E5A93B; /* Bật tone Vàng Mật Ong rực rỡ */
-    color: #ffffff;
-    border-color: #E5A93B;
-    font-weight: bold;
-    box-shadow: 0 3px 8px rgba(229, 169, 59, 0.2);
-}
-
-/* ================== PHẦN 3: XU HƯỚNG MUA SẮM ================== */
-.trending-section {
-    background-color: #ffffff;
-    border: 1px solid #F1E2C3;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(61, 49, 29, 0.03);
-}
-
-/* Đổi từ màu hồng nhạt cũ sang sắc Vàng Hổ Phách nhẹ quý phái */
-.trending-header {
-    background-color: #FFF3CD; /* Nền vàng kem pastel nhẹ nhàng dịu mắt */
-    padding: 15px 20px;
-    border-bottom: 1px solid #F1E2C3;
-}
-
-.trending-title {
+.sidebar-heading {
+    font-size: 1.1rem;
+    color: #222;
     margin: 0;
-    color: #C47B00; /* Tiêu đề đổi sang màu vàng hổ phách đậm đà */
-    font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
 }
 
-.trending-content {
-    padding: 20px;
+.arrow-icon {
+    display: none;
+    color: #411398;
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
 }
 
-.empty-state {
-    text-align: center;
-    padding: 20px 0;
-    color: #7A6B53;
+.category-menu {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+    border-top: 2px solid #F3EEF5;
+    padding-top: 15px;
 }
 
-.trending-grid {
+.category-item {
+    width: 100%;
+    text-align: left;
+    padding: 12px 18px;
+    margin-bottom: 8px;
+    border: none;
+    background: transparent;
+    border-radius: 12px;
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.category-item:focus,
+.category-item:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.category-item:hover {
+    background: #f5f0ee;
+    color: #843f3a;
+}
+
+.category-item.active {
+    background: #c84242;
+    color: #ffffff;
+}
+
+.product-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 25px;
 }
 
-/* ====== PHÂN TRANG (PAGINATION) ====== */
-.pagination-wrapper {
+.pagination-wrap {
+    margin-top: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
-    margin-top: 30px;
 }
 
-.pagination-btn {
-    padding: 8px 16px;
+.paging-btn {
+    padding: 10px 25px;
+    border: 2px solid #5f2313;
+    background: #490707;
+    color: #d9a89c;
+    border-radius: 50px;
+    font-weight: 700;
     cursor: pointer;
-    border: 1px solid #C4A46A; /* Đổi viền nút phân trang sang màu vàng đất */
-    background-color: #ffffff;
-    color: #51422A;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-.pagination-btn:hover:not(:disabled) {
-    background-color: #FFF3CD; /* Hover nút phân trang chuyển tone kem vàng */
-    color: #C47B00;
-    border-color: #E5A93B;
+.paging-btn:focus,
+.paging-btn:active {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-.pagination-btn:disabled {
+.paging-btn:hover:not(:disabled) {
+    background: #df6e41;
+    color: #ffffff;
+    border: none;
+}
+
+.paging-btn:disabled {
+    opacity: 0.3;
     cursor: not-allowed;
-    background-color: #FFFDF9;
-    border-color: #F1E2C3;
-    color: #A69271;
-    opacity: 0.6;
+    border-color: #E2D1F9;
 }
 
-.pagination-info {
-    font-size: 14px;
-    color: #51422A;
+.current-page-tag {
+    background: #ffc37f;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin: 0 4px;
 }
 
-/* ================== RESPONSIVE CƠ BẢN ================== */
+.product-status {
+    text-align: center;
+    padding: 100px 0;
+    color: #B19CD9;
+    font-weight: 600;
+}
+
 @media (max-width: 992px) {
-    .flash-sale-grid { grid-template-columns: repeat(2, 1fr); }
-    .trending-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-@media (max-width: 768px) {
-    .trending-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-@media (max-width: 576px) {
-    .flash-sale-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .trending-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    
-    .product-list-sidebar.horizontal-mode .product-list-sidebar__btn {
-        padding: 8px 14px;
-        font-size: 13px;
+    .product-list-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
-    
-    .flash-sale-header {
-        justify-content: center;
-        text-align: center;
+
+    .sidebar-inner {
+        position: relative;
+        top: 0;
+        padding: 15px 20px;
+    }
+
+    .arrow-icon {
+        display: block;
+    }
+
+    .arrow-icon.open {
+        transform: rotate(180deg);
+    }
+
+    .category-menu {
+        display: none;
+        flex-direction: column;
+        margin-top: 15px;
+        gap: 5px;
+    }
+
+    .category-menu.show {
+        display: flex;
+    }
+
+    .category-item {
+        margin-bottom: 0;
+        white-space: normal;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
     }
 }

@@ -133,7 +133,7 @@ const Admin = () => {
       const u = JSON.parse(raw);
 
       if (u.role !== 'staff') {
-        navigate('/');
+        navigate('/admin');
         return;
       }
 
@@ -163,7 +163,7 @@ const Admin = () => {
           eRes,
           iRes,
         ] = await Promise.all([
-          fetch(`${jsonBase}products.json`),
+          fetch(`${jsonBase}product.json`),
           fetch(`${jsonBase}category.json`),
           fetch(`${jsonBase}bill.json`),
           fetch(`${jsonBase}customer.json`),
@@ -283,7 +283,7 @@ const Admin = () => {
       const u = JSON.parse(raw);
 
       const name = String(
-        u.user || u.name || 'Staff'
+        u.user || u.name || 'staff'
       ).trim();
 
       const parts = name
@@ -318,7 +318,7 @@ const Admin = () => {
 
       return (
         String(
-          u.user || u.name || 'Staff'
+          u.user || u.name || 'staff'
         ).trim() || 'Administrator'
       );
     } catch {
@@ -345,8 +345,8 @@ const Admin = () => {
     const uncategorized =
       products.filter(
         (p) =>
-          p.categoryid == null ||
-          p.categoryid === ''
+          p.categoryId == null ||
+          p.categoryId === ''
       ).length;
 
     const revenue = bills.reduce(

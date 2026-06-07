@@ -1,26 +1,23 @@
-/* Bao phủ toàn bộ trang, tạo nền trắng kem ấm áp */
 .detail-page-wrapper {
-    background-color: #FFFDF6 !important; /* Đồng bộ với màu nền :root toàn trang */
-    color: #3D311D !important;           /* Ép chữ về tone nâu gỗ đậm quý phái */
+    background-color: #FFFDF6 !important; 
+    color: #3d251d !important;           
     min-height: 100vh;
     padding: 30px 0;
     display: flex;
     justify-content: center;
 }
 
-/* Khối giới hạn chiều rộng thu nhỏ lại ở giữa màn hình */
 .detail-inner-container {
     width: 100%;
-    max-width: 850px; /* Bóp nhỏ chiều rộng toàn khu vực xuống 850px */
+    max-width: 850px; 
     padding: 0 20px;
     box-sizing: border-box;
 }
 
-/* Nút quay lại màu nâu nhạt */
 .back-button {
     background: none;
     border: none;
-    color: #7A6B53; /* Đổi từ màu xám sang màu nâu đất nhạt */
+    color: #7c4435; 
     font-size: 14px;
     cursor: pointer;
     margin-bottom: 15px;
@@ -29,29 +26,26 @@
 }
 
 .back-button:hover {
-    color: #E5A93B; /* Quay lại chuyển vàng khi di chuột */
+    color: #a32f25; 
 }
 
-/* Card trắng chứa nội dung sách với viền và bóng đổ tone ấm */
 .detail-card {
     background-color: #ffffff !important;
-    color: #3D311D !important;
+    color: #3d2a1d !important;
     border-radius: 8px;
-    box-shadow: 0 6px 20px rgba(61, 49, 29, 0.05); /* Đổ bóng tone nâu siêu nhẹ */
+    box-shadow: 0 6px 20px rgba(61, 49, 29, 0.05); 
     padding: 24px;
     display: flex;
-    gap: 35px; /* Khoảng cách giữa 2 cột */
+    gap: 35px; 
 }
 
-/* ================= BÊN TRÁI: ẢNH (ĐÃ THU GỌN) ================= */
 .detail-image-section {
-    flex: 0 0 300px; /* Cố định độ rộng khu vực ảnh là 300px không cho phình to */
+    flex: 0 0 300px; 
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Khung ảnh chính nhỏ gọn hơn */
 .detail-image {
     width: 300px;
     height: 300px;
@@ -69,7 +63,6 @@
     object-fit: contain;
 }
 
-/* Hàng ảnh thu nhỏ */
 .thumbnail-list {
     display: flex;
     gap: 10px;
@@ -79,9 +72,8 @@
 }
 
 .thumbnail-item {
-    width: 55px; /* Thu nhỏ ảnh thumbnail xuống 55px */
+    width: 55px; 
     height: 55px;
-    border: 1px solid #C4A46A; /* Đồng bộ viền vàng đất */
     border-radius: 4px;
     overflow: hidden;
     cursor: pointer;
@@ -94,14 +86,12 @@
     object-fit: cover;
 }
 
-/* Đổi viền active/hover từ đỏ sang màu vàng mật ong rực rỡ */
 .thumbnail-item.active, 
 .thumbnail-item:hover {
-    border-color: #E5A93B;
-    box-shadow: 0 0 0 2px rgba(229, 169, 59, 0.2);
+    border-color: #e5713b;
+    box-shadow: 0 0 0 2px rgba(229, 99, 59, 0.2);
 }
 
-/* ================= BÊN PHẢI: THÔNG TIN CHỮ ================= */
 .detail-info {
     flex: 1;
     display: flex;
@@ -109,9 +99,9 @@
 }
 
 .product-title-heading {
-    font-size: 20px; /* Thu nhỏ font chữ tiêu đề sách */
+    font-size: 20px; 
     font-weight: bold;
-    color: #3D311D !important; /* Chữ tiêu đề màu nâu gỗ đậm */
+    color: #3D311D !important; 
     margin: 0 0 12px 0;
     line-height: 1.4;
 }
@@ -122,28 +112,26 @@
 
 .info-line {
     font-size: 14px;
-    color: #51422A !important; /* Màu chữ thông tin phụ nâu vừa */
+    color: #51422A !important; 
     margin: 5px 0;
 }
 
 .info-value {
     font-weight: bold;
-    color: #3D311D !important; /* Giá trị thông tin màu nâu gỗ đậm */
+    color: #3D311D !important; 
 }
 
-/* Khu vực đánh giá sao */
 .product-stars-rating {
     font-size: 14px;
     margin-bottom: 15px;
 }
 
 .product-stars-rating span {
-    color: #F4B41A; /* Màu vàng nghệ/vàng mật ong chuẩn cho ngôi sao */
+    color: #F4B41A; 
     font-size: 16px; 
     margin-right: 2px;
 }
 
-/* Giá tiền đổi từ đỏ tươi sang màu đỏ cam cháy quý phái */
 .detail-price-box {
     margin-bottom: 20px;
 }
@@ -151,43 +139,40 @@
 .current-price-red {
     font-size: 24px;
     font-weight: bold;
-    color: #D44900 !important; /* Đỏ cam cháy đồng bộ với giỏ hàng và cart-badge */
+    color: #D44900 !important; 
 }
 
-/* Khối nút bấm hành động */
 .detail-action-buttons {
     display: flex;
     gap: 12px;
     margin-bottom: 20px;
 }
 
-/* Nút Thêm vào giỏ hàng: Nền trắng, viền và chữ màu vàng mật ong */
 .add-to-cart-button {
     flex: 1;
     padding: 10px 15px;
     font-size: 14px;
     font-weight: bold;
     background-color: #ffffff;
-    color: #E5A93B;
-    border: 2px solid #E5A93B; /* Viền vàng mật ong dày dặn */
+    color: #e55d3b;
+    border: 2px solid #c13225; 
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .add-to-cart-button:hover {
-    background-color: #FFF3CD; /* Nền vàng nhạt êm dịu khi hover */
-    color: #C47B00;
-    border-color: #C47B00;
+    background-color: #ffefeb; 
+    color: #c44800;
+    border-color: #c42e00;
 }
 
-/* Nút Mua ngay: Chuyển hoàn toàn từ đỏ sang màu Vàng Mật Ong nổi bật */
 .buy-now-button-red {
     flex: 1;
     padding: 10px 15px;
     font-size: 14px;
     font-weight: bold;
-    background-color: #E5A93B; /* Vàng mật ong chủ đạo */
+    background-color: #e53b3b; 
     color: #ffffff;
     border: none;
     border-radius: 4px;
@@ -197,16 +182,15 @@
 }
 
 .buy-now-button-red:hover {
-    background-color: #C47B00; /* Vàng đậm hổ phách khi hover */
+    background-color: #c42e00; 
 }
 
 .buy-now-button-red:active {
     transform: scale(0.98);
 }
 
-/* Khối mô tả sản phẩm bên dưới */
 .info-description-box {
-    border-top: 1px solid #F1E2C3; /* Viền ngăn cách màu be vàng */
+    border-top: 1px solid #F1E2C3; 
     padding-top: 15px;
 }
 
@@ -219,12 +203,11 @@
 
 .description-text {
     font-size: 13.5px;
-    color: #51422A !important; /* Chữ mô tả màu nâu vừa dễ đọc trên nền sáng */
+    color: #51422A !important;
     line-height: 1.5;
     margin: 0;
 }
 
-/* Responsive di động */
 @media (max-width: 650px) {
     .detail-card {
         flex-direction: column;

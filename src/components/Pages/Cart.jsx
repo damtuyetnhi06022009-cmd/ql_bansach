@@ -8,13 +8,11 @@ const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
 
-    // SỬA TẠI ĐÂY: Tự động tích chọn tất cả sản phẩm khi vừa load giỏ hàng
     useEffect(() => {
         const savedCart = localStorage.getItem('cart');
         if (savedCart) {
             const parsedCart = JSON.parse(savedCart);
             setCartItems(parsedCart);
-            // Lấy toàn bộ ID sản phẩm để cho vào trạng thái đã chọn
             setSelectedItems(parsedCart.map(item => item.id));
         }
     }, []);

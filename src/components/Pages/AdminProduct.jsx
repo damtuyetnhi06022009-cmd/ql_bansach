@@ -3,7 +3,9 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css';
 
+// Đảm bảo dấu gạch chéo chuẩn cho file tĩnh
 const jsonBase = import.meta.env.BASE_URL || '/';
+const cleanJsonBase = jsonBase.endsWith('/') ? jsonBase : `${jsonBase}/`;
 
 const emptyForm = () => ({
   id: '',
@@ -28,8 +30,8 @@ function productToForm(p) {
     sizeS: p.sizeS ?? 'S',
     sizeM: p.sizeM ?? 'M',
     sizeL: p.sizeL ?? 'L',
-    currentPrice: p.currentPrice !== null ? String(p.currentPrice) : '',
-    originalPrice: p.originalPrice !== null ? String(p.originalPrice) : '',
+    currentPrice: p.currentPrice !== null && p.currentPrice !== undefined ? String(p.currentPrice) : '',
+    originalPrice: p.originalPrice !== null && p.originalPrice !== undefined ? String(p.originalPrice) : '',
     discount: p.discount !== null ? String(p.discount) : '',
     rating: p.rating !== null ? String(p.rating) : '',
     sold: p.sold !== null ? String(p.sold) : '',
@@ -46,24 +48,25 @@ function formToProduct(form, nextId) {
     sizeS: form.sizeS.trim() || 'S',
     sizeM: form.sizeM.trim() || 'M',
     sizeL: form.sizeL.trim() || 'L',
-    currentPrice: Number(form.currentPrice) || 0,
-    originalPrice: Number(form.originalPrice) || 0,
+    // Giữ lại NaN nếu người dùng nhập sai để hàm Validate bắt được
+    currentPrice: form.currentPrice.trim() === '' ? 0 : Number(form.currentPrice),
+    originalPrice: form.originalPrice.trim() === '' ? 0 : Number(form.originalPrice),
     discount: form.discount.trim(),
     rating: Number(form.rating) || 0,
     sold: Number(form.sold) || 0,
-    categoryid: Number(form.categoryid) || 0,
+    categoryid: form.categoryid.trim() === '' ? 0 : Number(form.categoryid),
   };
 }
 
 function validateProduct(built) {
   if (!built.name) return 'Vui lòng nhập tên sản phẩm';
-  if (!Number.isFinite(built.currentPrice)) return 'Giá hiện tại phải là số';
-  if (!Number.isFinite(built.originalPrice)) return 'Giá gốc phải là số';
-  if (!Number.isFinite(built.categoryid)) return 'Mã danh mục phải là số';
+  if (Number.isNaN(built.currentPrice) || built.currentPrice < 0) return 'Giá hiện tại phải là số hợp lệ';
+  if (Number.isNaN(built.originalPrice) || built.originalPrice < 0) return 'Giá gốc phải là số hợp lệ';
+  if (Number.isNaN(built.categoryid) || built.categoryid <= 0) return 'Mã danh mục phải là số hợp lệ';
   return null;
 }
 
-function AdminProduct({ embedded = false }) {
+export default function AdminProduct({ embedded = false }) {
   const navigate = useNavigate();
   const [allowed, setAllowed] = useState(embedded);
   const [products, setProducts] = useState([]);
@@ -87,6 +90,7 @@ function AdminProduct({ embedded = false }) {
     setSaving(true);
     setSaveError('');
     try {
+      // LƯU Ý: API này phải thực sự tồn tại ở backend, nếu không sẽ bị lỗi HTML '<'
       await axios.put('/api/product', nextList, {
         headers: { 'Content-Type': 'application/json' },
       });
@@ -98,7 +102,7 @@ function AdminProduct({ embedded = false }) {
       const msg =
         err.response?.data?.error ||
         (err.code === 'ERR_NETWORK' || err.response?.status === 404
-          ? 'Chỉ lưu được khi chạy npm run dev hoặc npm run preview (API Vite).'
+          ? 'Không kết nối được tới API Server (404/Network Error). Hãy chắc chắn Backend đang chạy.'
           : null) ||
         'Không lưu được dữ liệu.';
       setSaveError(msg);
@@ -107,6 +111,7 @@ function AdminProduct({ embedded = false }) {
     }
   }, []);
 
+  // Kiểm tra quyền truy cập
   useEffect(() => {
     if (embedded) {
       setAllowed(true);
@@ -129,14 +134,21 @@ function AdminProduct({ embedded = false }) {
     }
   }, [navigate, embedded]);
 
+  // Tải dữ liệu từ file JSON tĩnh
   useEffect(() => {
     if (!allowed) return;
     const load = async () => {
       setLoading(true);
       setLoadError('');
       try {
-        const res = await fetch(`${jsonBase}products.json`);
-        if (!res.ok) throw new Error('Không tải được products.json');
+        const res = await fetch(`${cleanJsonBase}products.json`);
+        
+        // Chặn ngay nếu response không phải JSON (tránh lỗi Unexpected token '<')
+        const contentType = res.headers.get('content-type');
+        if (!res.ok || (contentType && !contentType.includes('application/json'))) {
+          throw new Error('Không tải được file dữ liệu products.json (URL sai hoặc file không tồn tại trong thư mục public)');
+        }
+
         const data = await res.json();
         setProducts(Array.isArray(data) ? data : []);
       } catch (e) {
@@ -147,13 +159,6 @@ function AdminProduct({ embedded = false }) {
     };
     load();
   }, [allowed]);
-
-  const goHome = () => navigate('/');
-  const logout = () => {
-    localStorage.removeItem('currentUser');
-    window.dispatchEvent(new Event('userUpdated'));
-    navigate('/login');
-  };
 
   const openCreate = () => {
     setIsNew(true);
@@ -215,220 +220,221 @@ function AdminProduct({ embedded = false }) {
     setAppliedSearchId('');
   };
 
-  const bodyContent = (
-    <div className="admin-row">
-      {loadError && <div className="admin-msg admin-msg--error">{loadError}</div>}
-      {saveError && <div className="admin-msg admin-msg--error">{saveError}</div>}
-      {loading ? (
-        <p>Đang tải...</p>
-      ) : view === 'list' ? (
-        <>
-          <div className="admin-toolbar admin-toolbar--row">
-            <button type="button" className="admin-btn" onClick={openCreate} disabled={saving}>
-              + Thêm sản phẩm
-            </button>
-            <div className="admin-toolbar-search">
-              <label htmlFor="admin-product-search-id">Tìm kiếm: </label>
-              <input
-                id="admin-product-search-id"
-                type="text"
-                inputMode="numeric"
-                value={searchIdInput}
-                onChange={(e) => setSearchIdInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault();
-                    applyIdSearch();
-                  }
-                }}
-              />
-              <button type="button" className="admin-btn" onClick={applyIdSearch} disabled={saving}>
-                Tìm
-              </button>
-              {appliedSearchId.trim() !== '' && (
-                <button type="button" className="admin-btn admin-btn--ghost" onClick={clearIdSearch} disabled={saving}>
-                  Hiện tất cả
-                </button>
-              )}
-            </div>
-          </div>
+  if (!allowed) return null;
 
-          <div className="admin-table-wrap">
-            <table className="admin-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Tên</th>
-                  <th>Ảnh (key)</th>
-                  <th>Giá gốc</th>
-                  <th>Giá hiện tại</th>
-                  <th>Danh mục</th>
-                  <th />
-                </tr>
-              </thead>
-              <tbody>
-                {displayedProducts.length === 0 ? (
+  return (
+    <div className="admin-product-container">
+      <div className="admin-row">
+        {loadError && <div className="admin-msg admin-msg--error">{loadError}</div>}
+        {saveError && <div className="admin-msg admin-msg--error">{saveError}</div>}
+        
+        {loading ? (
+          <p>Đang tải...</p>
+        ) : view === 'list' ? (
+          <>
+            <div className="admin-toolbar admin-toolbar--row">
+              <button type="button" className="admin-btn" onClick={openCreate} disabled={saving}>
+                + Thêm sản phẩm
+              </button>
+              <div className="admin-toolbar-search">
+                <label htmlFor="admin-product-search-id">Tìm kiếm ID: </label>
+                <input
+                  id="admin-product-search-id"
+                  type="text"
+                  inputMode="numeric"
+                  value={searchIdInput}
+                  onChange={(e) => setSearchIdInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      applyIdSearch();
+                    }
+                  }}
+                />
+                <button type="button" className="admin-btn" onClick={applyIdSearch} disabled={saving}>
+                  Tìm
+                </button>
+                {appliedSearchId.trim() !== '' && (
+                  <button type="button" className="admin-btn admin-btn--ghost" onClick={clearIdSearch} disabled={saving}>
+                    Hiện tất cả
+                  </button>
+                )}
+              </div>
+            </div>
+
+            <div className="admin-table-wrap">
+              <table className="admin-table">
+                <thead>
                   <tr>
-                    <td colSpan={7} className="admin-table_empty">
-                      {appliedSearchId.trim()
-                        ? `Không có sản phẩm với ID "${appliedSearchId.trim()}".`
-                        : 'Chưa có sản phẩm.'}
-                    </td>
+                    <th>ID</th>
+                    <th>Tên</th>
+                    <th>Ảnh (key)</th>
+                    <th>Giá gốc</th>
+                    <th>Giá hiện tại</th>
+                    <th>Danh mục</th>
+                    <th />
                   </tr>
-                ) : (
-                  displayedProducts.map((p) => (
-                    <tr key={p.id}>
-                      <td>{p.id}</td>
-                      <td>{p.name}</td>
-                      <td>{p.imageKey}</td>
-                      <td>{p.originalPrice}</td>
-                      <td>{p.currentPrice}</td>
-                      <td>{p.categoryid}</td>
-                      <td>
-                        <div className="admin-table_actions">
-                          <button
-                            type="button"
-                            className="admin-table_link"
-                            onClick={() => openEdit(p)}
-                            disabled={saving}
-                          >
-                            Sửa
-                          </button>
-                          <button
-                            type="button"
-                            className="admin-table_link admin-table_link--danger"
-                            onClick={() => handleDelete(p.id)}
-                            disabled={saving}
-                          >
-                            Xóa
-                          </button>
-                        </div>
+                </thead>
+                <tbody>
+                  {displayedProducts.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} className="admin-table_empty">
+                        {appliedSearchId.trim()
+                          ? `Không có sản phẩm với ID "${appliedSearchId.trim()}".`
+                          : 'Chưa có sản phẩm.'}
                       </td>
                     </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </>
-      ) : (
-        <form className="admin-form-card" onSubmit={handleSubmitForm}>
-          <h2>{isNew ? 'Thêm sản phẩm' : 'Sửa sản phẩm'}</h2>
-          <div className="admin-form-grid">
-            {!isNew && (
-              <label>
-                ID
-                <input value={form.id} readOnly />
+                  ) : (
+                    displayedProducts.map((p) => (
+                      <tr key={p.id}>
+                        <td>{p.id}</td>
+                        <td>{p.name}</td>
+                        <td>{p.imageKey}</td>
+                        <td>{p.originalPrice}</td>
+                        <td>{p.currentPrice}</td>
+                        <td>{p.categoryid}</td>
+                        <td>
+                          <div className="admin-table_actions">
+                            <button
+                              type="button"
+                              className="admin-table_link"
+                              onClick={() => openEdit(p)}
+                              disabled={saving}
+                            >
+                              Sửa
+                            </button>
+                            <button
+                              type="button"
+                              className="admin-table_link admin-table_link--danger"
+                              onClick={() => handleDelete(p.id)}
+                              disabled={saving}
+                            >
+                              Xóa
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </>
+        ) : (
+          <form className="admin-form-card" onSubmit={handleSubmitForm}>
+            <h2>{isNew ? 'Thêm sản phẩm' : 'Sửa sản phẩm'}</h2>
+            <div className="admin-form-grid">
+              {!isNew && (
+                <label>
+                  ID
+                  <input value={form.id} readOnly />
+                </label>
+              )}
+              <label className="admin-form-grid_full">
+                Tên sản phẩm
+                <input
+                  type="text"
+                  value={form.name}
+                  onChange={(e) => handleFormChange('name', e.target.value)}
+                  required
+                />
               </label>
-            )}
-            <label className="admin-form-grid_full">
-              Tên sản phẩm
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) => handleFormChange('name', e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Mã ảnh (imageKey)
-              <input
-                type="text"
-                value={form.imageKey}
-                onChange={(e) => handleFormChange('imageKey', e.target.value)}
-              />
-            </label>
-            <label>
-              Mã danh mục (categoryid)
-              <input
-                type="number"
-                value={form.categoryid}
-                onChange={(e) => handleFormChange('categoryid', e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Giá gốc
-              <input
-                type="number"
-                value={form.originalPrice}
-                onChange={(e) => handleFormChange('originalPrice', e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Giá hiện tại
-              <input
-                type="number"
-                value={form.currentPrice}
-                onChange={(e) => handleFormChange('currentPrice', e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Giảm giá (Ví dụ: -20%)
-              <input
-                type="text"
-                value={form.discount}
-                onChange={(e) => handleFormChange('discount', e.target.value)}
-              />
-            </label>
-            <label>
-              Đánh giá (Rating)
-              <input
-                type="number"
-                step="0.1"
-                value={form.rating}
-                onChange={(e) => handleFormChange('rating', e.target.value)}
-              />
-            </label>
-            <label>
-              Đã bán (Sold)
-              <input
-                type="number"
-                value={form.sold}
-                onChange={(e) => handleFormChange('sold', e.target.value)}
-              />
-            </label>
-            <label>
-              Size S
-              <input
-                type="text"
-                value={form.sizeS}
-                onChange={(e) => handleFormChange('sizeS', e.target.value)}
-              />
-            </label>
-            <label>
-              Size M
-              <input
-                type="text"
-                value={form.sizeM}
-                onChange={(e) => handleFormChange('sizeM', e.target.value)}
-              />
-            </label>
-            <label>
-              Size L
-              <input
-                type="text"
-                value={form.sizeL}
-                onChange={(e) => handleFormChange('sizeL', e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="admin-form-actions">
-            <button type="submit" className="admin-btn" disabled={saving}>
-              {saving ? 'Đang lưu...' : 'Lưu'}
-            </button>
-            <button type="button" className="admin-btn admin-btn--ghost" onClick={cancelForm} disabled={saving}>
-              Hủy
-            </button>
-          </div>
-        </form>
-      )}
+              <label>
+                Mã ảnh (imageKey)
+                <input
+                  type="text"
+                  value={form.imageKey}
+                  onChange={(e) => handleFormChange('imageKey', e.target.value)}
+                />
+              </label>
+              <label>
+                Mã danh mục (categoryid)
+                <input
+                  type="number"
+                  value={form.categoryid}
+                  onChange={(e) => handleFormChange('categoryid', e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                Giá gốc
+                <input
+                  type="number"
+                  value={form.originalPrice}
+                  onChange={(e) => handleFormChange('originalPrice', e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                Giá hiện tại
+                <input
+                  type="number"
+                  value={form.currentPrice}
+                  onChange={(e) => handleFormChange('currentPrice', e.target.value)}
+                  required
+                />
+              </label>
+              <label>
+                Giảm giá (Ví dụ: -20%)
+                <input
+                  type="text"
+                  value={form.discount}
+                  onChange={(e) => handleFormChange('discount', e.target.value)}
+                />
+              </label>
+              <label>
+                Đánh giá (Rating)
+                <input
+                  type="number"
+                  step="0.1"
+                  value={form.rating}
+                  onChange={(e) => handleFormChange('rating', e.target.value)}
+                />
+              </label>
+              <label>
+                Đã bán (Sold)
+                <input
+                  type="number"
+                  value={form.sold}
+                  onChange={(e) => handleFormChange('sold', e.target.value)}
+                />
+              </label>
+              <label>
+                Size S
+                <input
+                  type="text"
+                  value={form.sizeS}
+                  onChange={(e) => handleFormChange('sizeS', e.target.value)}
+                />
+              </label>
+              <label>
+                Size M
+                <input
+                  type="text"
+                  value={form.sizeM}
+                  onChange={(e) => handleFormChange('sizeM', e.target.value)}
+                />
+              </label>
+              <label>
+                Size L
+                <input
+                  type="text"
+                  value={form.sizeL}
+                  onChange={(e) => handleFormChange('sizeL', e.target.value)}
+                />
+              </label>
+            </div>
+            <div className="admin-form-actions">
+              <button type="submit" className="admin-btn" disabled={saving}>
+                {saving ? 'Đang lưu...' : 'Lưu'}
+              </button>
+              <button type="button" className="admin-btn admin-btn--ghost" onClick={cancelForm} disabled={saving}>
+                Hủy
+              </button>
+            </div>
+          </form>
+        )}
+      </div>
     </div>
   );
-
-  return allowed ? <div className="admin-product-container">{bodyContent}</div> : null;
 }
-
-export default AdminProduct;
