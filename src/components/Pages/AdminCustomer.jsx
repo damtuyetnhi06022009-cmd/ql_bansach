@@ -5,10 +5,14 @@ import './Admin.css';
 
 const jsonBase = import.meta.env.BASE_URL || '/';
 
+// Khởi tạo form trống phù hợp dữ liệu khách hàng
 const emptyForm = () => ({
   id: '',
   name: '',
   phone: '',
+  email: '',
+  address: '',
+  type: 'Cá nhân'
 });
 
 function rowToForm(c) {
@@ -16,14 +20,20 @@ function rowToForm(c) {
     id: String(c.id),
     name: c.name ?? '',
     phone: c.phone ?? '',
+    email: c.email ?? '',
+    address: c.address ?? '',
+    type: c.type ?? 'Cá nhân'
   };
 }
 
 function formToRow(form, nextId) {
   return {
-    id: form.id ? Number(form.id) : nextId,
+    id: form.id ? form.id : nextId, // Giữ nguyên chuỗi ID nếu sửa, hoặc gán ID mới tạo
     name: form.name.trim(),
     phone: form.phone.trim(),
+    email: form.email.trim(),
+    address: form.address.trim(),
+    type: form.type.trim()
   };
 }
 
@@ -43,16 +53,19 @@ function AdminCustomer({ embedded = false }) {
   const [appliedSearchId, setAppliedSearchId] = useState('');
 
   const displayedRows = useMemo(() => {
-    const q = appliedSearchId.trim();
+    const q = appliedSearchId.trim().toLowerCase();
     if (!q) return rows;
-    return rows.filter((r) => String(r.id) === q);
+    return rows.filter((r) => String(r.id).toLowerCase().includes(q));
   }, [rows, appliedSearchId]);
 
+  // Đổi luồng lưu về lưu trực tiếp tệp public/customer.json
   const persist = useCallback(async (nextList) => {
     setSaving(true);
     setSaveError('');
     try {
-      await axios.put('/api/customer', nextList, {
+      // Nếu file gốc chỉ lưu 1 object, khi lưu nhiều ta nên lưu dạng mảng hoặc giữ nguyên cục bộ
+      // Để tránh lỗi ghi, ta chuyển danh sách thành dạng cấu trúc chuẩn
+      await axios.put('./public/customer.json', nextList, {
         headers: { 'Content-Type': 'application/json' },
       });
       setRows(nextList);
@@ -63,9 +76,9 @@ function AdminCustomer({ embedded = false }) {
       const msg =
         err.response?.data?.error ||
         (err.code === 'ERR_NETWORK' || err.response?.status === 404
-          ? 'Chỉ lưu được khi chạy npm run dev hoặc npm run preview (API Vite).'
+          ? 'Chỉ lưu được khi chạy bằng lệnh Vite (npm run dev).'
           : null) ||
-        'Không lưu được dữ liệu.';
+        'Không lưu được dữ liệu vào customer.json.';
       setSaveError(msg);
     } finally {
       setSaving(false);
@@ -84,7 +97,8 @@ function AdminCustomer({ embedded = false }) {
     }
     try {
       const u = JSON.parse(raw);
-      if (u.role !== 'staff') {
+      // Hỗ trợ cả 'staff' và 'admin' để tránh bị chặn trắng trang bên ngoài
+      if (u.role !== 'staff' && u.role !== 'admin') {
         navigate('/');
         return;
       }
@@ -101,9 +115,15 @@ function AdminCustomer({ embedded = false }) {
       setLoadError('');
       try {
         const res = await fetch(`${jsonBase}customer.json`);
-        if (!res.ok) throw new Error('Không tải được customer.json');
+        if (!res.ok) throw new Error('Không tải được customer.json trong thư mục public');
         const data = await res.json();
-        setRows(Array.isArray(data) ? data : []);
+        
+        // GIẢI QUYẾT LỖI TRẮNG TRANG: Nếu dữ liệu tải về là 1 Object đơn lẻ, tự động chuyển thành Mảng để Map không lỗi
+        if (data && !Array.isArray(data)) {
+          setRows([data]);
+        } else {
+          setRows(Array.isArray(data) ? data : []);
+        }
       } catch (e) {
         setLoadError(e.message || 'Lỗi tải dữ liệu');
       } finally {
@@ -112,13 +132,6 @@ function AdminCustomer({ embedded = false }) {
     };
     load();
   }, [allowed]);
-
-  const goHome = () => navigate('/');
-  const logout = () => {
-    localStorage.removeItem('currentUser');
-    window.dispatchEvent(new Event('userUpdated'));
-    navigate('/login');
-  };
 
   const openCreate = () => {
     setIsNew(true);
@@ -151,13 +164,22 @@ function AdminCustomer({ embedded = false }) {
       setSaveError('Vui lòng nhập tên khách hàng');
       return;
     }
-    const nextId = rows.reduce((m, r) => Math.max(m, Number(r.id) || 0), 0) + 1;
-    const built = formToRow(form, nextId);
 
     let nextList;
     if (isNew) {
+      // Tạo mã ID dạng KHxxx tiếp theo một cách thông minh
+      const numericIds = rows
+        .map(r => {
+          const match = String(r.id).match(/\d+/);
+          return match ? Number(match[0]) : 0;
+        });
+      const maxNum = numericIds.length > 0 ? Math.max(...numericIds) : 0;
+      const nextId = `KH${String(maxNum + 1).padStart(3, '0')}`;
+      
+      const built = formToRow(form, nextId);
       nextList = [...rows, built];
     } else {
+      const built = formToRow(form, form.id);
       const idx = rows.findIndex((r) => String(r.id) === String(form.id));
       if (idx === -1) {
         setSaveError('Không tìm thấy bản ghi để cập nhật');
@@ -169,7 +191,7 @@ function AdminCustomer({ embedded = false }) {
   };
 
   const handleDelete = (id) => {
-    if (!window.confirm('Xóa khách hàng này?')) return;
+    if (!window.confirm('Xóa khách hàng này khỏi danh sách?')) return;
     persist(rows.filter((r) => String(r.id) !== String(id)));
   };
 
@@ -184,7 +206,7 @@ function AdminCustomer({ embedded = false }) {
       {loadError && <div className="admin-msg admin-msg--error">{loadError}</div>}
       {saveError && <div className="admin-msg admin-msg--error">{saveError}</div>}
       {loading ? (
-        <p>Đang tải...</p>
+        <p>Đang tải dữ liệu khách hàng...</p>
       ) : view === 'list' ? (
         <>
           <div className="admin-toolbar admin-toolbar--row">
@@ -192,11 +214,11 @@ function AdminCustomer({ embedded = false }) {
               + Thêm khách hàng
             </button>
             <div className="admin-toolbar-search">
-              <label htmlFor="admin-customer-search-id">Tìm kiếm: </label>
+              <label htmlFor="admin-customer-search-id">Tìm kiếm ID: </label>
               <input
                 id="admin-customer-search-id"
                 type="text"
-                inputMode="numeric"
+                placeholder="Ví dụ: KH001"
                 value={searchIdInput}
                 onChange={(e) => setSearchIdInput(e.target.value)}
                 onKeyDown={(e) => {
@@ -221,27 +243,33 @@ function AdminCustomer({ embedded = false }) {
             <table className="admin-table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Tên</th>
-                  <th>Điện thoại</th>
+                  <th>Mã KH (ID)</th>
+                  <th>Tên khách hàng</th>
+                  <th>Số điện thoại</th>
+                  <th>Email</th>
+                  <th>Địa chỉ</th>
+                  <th>Phân loại</th>
                   <th />
                 </tr>
               </thead>
               <tbody>
                 {displayedRows.length === 0 ? (
                   <tr>
-                    <td colSpan={4} className="admin-table_empty">
+                    <td colSpan={7} className="admin-table_empty">
                       {appliedSearchId.trim()
-                        ? `Không có khách hàng với ID "${appliedSearchId.trim()}".`
-                        : 'Chưa có khách hàng.'}
+                        ? `Không tìm thấy khách hàng nào khớp với mã "${appliedSearchId.trim()}".`
+                        : 'Chưa có dữ liệu khách hàng nào.'}
                     </td>
                   </tr>
                 ) : (
                   displayedRows.map((r) => (
                     <tr key={r.id}>
-                      <td>{r.id}</td>
+                      <td><strong>{r.id}</strong></td>
                       <td>{r.name}</td>
-                      <td>{r.phone}</td>
+                      <td>{r.phone || '---'}</td>
+                      <td>{r.email || '---'}</td>
+                      <td>{r.address || '---'}</td>
+                      <td>{r.type || 'Cá nhân'}</td>
                       <td>
                         <div className="admin-table_actions">
                           <button
@@ -271,16 +299,16 @@ function AdminCustomer({ embedded = false }) {
         </>
       ) : (
         <form className="admin-form-card" onSubmit={handleSubmitForm}>
-          <h2>{isNew ? 'Thêm khách hàng' : 'Sửa khách hàng'}</h2>
+          <h2>{isNew ? 'Đăng ký khách hàng mới' : 'Cập nhật thông tin khách hàng'}</h2>
           <div className="admin-form-grid">
             {!isNew && (
               <label>
-                ID
-                <input value={form.id} readOnly />
+                Mã khách hàng
+                <input value={form.id} readOnly style={{ backgroundColor: '#f0f0f0' }} />
               </label>
             )}
             <label className="admin-form-grid_full">
-              Tên
+              Họ và tên
               <input
                 type="text"
                 value={form.name}
@@ -289,7 +317,7 @@ function AdminCustomer({ embedded = false }) {
               />
             </label>
             <label className="admin-form-grid_full">
-              Điện thoại
+              Số điện thoại
               <input
                 type="text"
                 value={form.phone}
@@ -297,13 +325,41 @@ function AdminCustomer({ embedded = false }) {
                 required
               />
             </label>
+            <label className="admin-form-grid_full">
+              Email
+              <input
+                type="email"
+                value={form.email}
+                onChange={(e) => handleFormChange('email', e.target.value)}
+              />
+            </label>
+            <label className="admin-form-grid_full">
+              Địa chỉ
+              <input
+                type="text"
+                value={form.address}
+                onChange={(e) => handleFormChange('address', e.target.value)}
+              />
+            </label>
+            <label className="admin-form-grid_full">
+              Loại khách hàng
+              <select 
+                value={form.type} 
+                onChange={(e) => handleFormChange('type', e.target.value)}
+                style={{ width: '100%', padding: '6px', marginTop: '4px' }}
+              >
+                <option value="Cá nhân">Cá nhân</option>
+                <option value="Doanh nghiệp">Doanh nghiệp</option>
+                <option value="Đại lý">Đại lý</option>
+              </select>
+            </label>
           </div>
           <div className="admin-form-actions">
             <button type="submit" className="admin-btn" disabled={saving}>
-              {saving ? 'Đang lưu...' : 'Lưu'}
+              {saving ? 'Đang lưu...' : 'Lưu lại'}
             </button>
             <button type="button" className="admin-btn admin-btn--ghost" onClick={cancelForm} disabled={saving}>
-              Hủy
+              Hủy bỏ
             </button>
           </div>
         </form>

@@ -1,8 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
 
-/* =========================
-   RESET + LAYOUT
-========================= */
 .ruang-layout,
 .ruang-layout * {
   box-sizing: border-box;
@@ -23,9 +20,6 @@
   background: #f8f9fc;
 }
 
-/* =========================
-   OVERLAY
-========================= */
 .ruang-overlay {
   display: none;
   position: fixed;
@@ -54,10 +48,7 @@
   z-index: 999;
   width: 224px;
   min-height: 100vh;
-  background: linear-gradient(180deg,
-      #6777ef 0%,
-      #5568dd 48%,
-      #4c5dce 100%);
+  background: rgb(169, 124, 124);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -443,7 +434,7 @@
   font-weight: 700;
   border-radius: 8px;
   border: none;
-  background: linear-gradient(180deg, #6777ef 0%, #5568dc 100%);
+  background:  rgb(134, 35, 35);
   color: #fff;
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(103, 119, 239, 0.35);

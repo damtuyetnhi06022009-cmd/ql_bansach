@@ -5,34 +5,40 @@ import './Admin.css';
 
 const jsonBase = import.meta.env.BASE_URL || '/';
 
+// Khởi tạo form trống tương ứng chuẩn tệp employee.json
 const emptyForm = () => ({
   id: '',
-  role: '',
   name: '',
-  gender: '',
-  birthdate: '',
   phone: '',
+  email: '',
+  salary: '',
+  status: 'Đang làm việc',
+  posittion: '',
 });
 
+// Đồng bộ hóa dữ liệu từ JSON vào Form chỉnh sửa
 function rowToForm(e) {
   return {
     id: String(e.id),
-    role: e.role ?? '',
     name: e.name ?? '',
-    gender: e.gender ?? '',
-    birthdate: e.birthdate ?? '',
-    phone: e.phone ?? '',
+    phone: e.phone !== null && e.phone !== undefined ? String(e.phone) : '',
+    email: e.email ?? '',
+    salary: e.salary !== null && e.salary !== undefined ? String(e.salary) : '',
+    status: e.status ?? 'Đang làm việc',
+    posittion: e.posittion ?? '', // Chuẩn chữ hai chữ 't' theo file json gốc
   };
 }
 
+// Chuyển đổi ngược từ Form về định dạng Object để lưu vào file JSON
 function formToRow(form, nextId) {
   return {
     id: form.id ? Number(form.id) : nextId,
-    role: form.role.trim(),
     name: form.name.trim(),
-    gender: form.gender.trim(),
-    birthdate: form.birthdate.trim(),
-    phone: form.phone.trim(),
+    phone: form.phone.trim() ? Number(form.phone) : 0,
+    email: form.email.trim(),
+    salary: form.salary ? Number(form.salary) : 0,
+    status: form.status.trim(),
+    posittion: form.posittion.trim(),
   };
 }
 
@@ -56,11 +62,12 @@ function AdminEmployee({ embedded = false }) {
     return rows.filter((r) => String(r.id) === q);
   }, [rows, appliedSearchId]);
 
+  // Sửa cơ chế lưu: Chuyển từ API ảo sang cập nhật file cục bộ trong thư mục public
   const persist = useCallback(async (nextList) => {
     setSaving(true);
     setSaveError('');
     try {
-      await axios.put('/api/employee', nextList, {
+      await axios.put('./public/employee.json', nextList, {
         headers: { 'Content-Type': 'application/json' },
       });
       setRows(nextList);
@@ -71,9 +78,9 @@ function AdminEmployee({ embedded = false }) {
       const msg =
         err.response?.data?.error ||
         (err.code === 'ERR_NETWORK' || err.response?.status === 404
-          ? 'Chỉ lưu được khi chạy npm run dev hoặc npm run preview (API Vite).'
+          ? 'Chỉ lưu được khi chạy bằng Vite (npm run dev) và cấu hình cho phép ghi tệp.'
           : null) ||
-        'Không lưu được dữ liệu.';
+        'Không lưu được dữ liệu vào employee.json.';
       setSaveError(msg);
     } finally {
       setSaving(false);
@@ -92,7 +99,9 @@ function AdminEmployee({ embedded = false }) {
     }
     try {
       const u = JSON.parse(raw);
-      if (u.role !== 'staff') {
+      // Nếu bạn muốn cả admin và staff đều vào được, sửa điều kiện tại đây thành:
+      // if (u.role !== 'staff' && u.role !== 'admin')
+      if (u.role !== 'staff' && u.role !== 'admin') {
         navigate('/');
         return;
       }
@@ -109,7 +118,7 @@ function AdminEmployee({ embedded = false }) {
       setLoadError('');
       try {
         const res = await fetch(`${jsonBase}employee.json`);
-        if (!res.ok) throw new Error('Không tải được employee.json');
+        if (!res.ok) throw new Error('Không tải được file employee.json. Đảm bảo file nằm trong thư mục public.');
         const data = await res.json();
         setRows(Array.isArray(data) ? data : []);
       } catch (e) {
@@ -120,13 +129,6 @@ function AdminEmployee({ embedded = false }) {
     };
     load();
   }, [allowed]);
-
-  const goHome = () => navigate('/');
-  const logout = () => {
-    localStorage.removeItem('currentUser');
-    window.dispatchEvent(new Event('userUpdated'));
-    navigate('/login');
-  };
 
   const openCreate = () => {
     setIsNew(true);
@@ -167,7 +169,7 @@ function AdminEmployee({ embedded = false }) {
     } else {
       const idx = rows.findIndex((r) => String(r.id) === String(form.id));
       if (idx === -1) {
-        setSaveError('Không tìm thấy bản ghi để cập nhật');
+        setSaveError('Không tìm thấy bản ghi nhân viên để cập nhật');
         return;
       }
       nextList = rows.map((r) => (String(r.id) === String(form.id) ? built : r));
@@ -176,7 +178,7 @@ function AdminEmployee({ embedded = false }) {
   };
 
   const handleDelete = (id) => {
-    if (!window.confirm('Xóa nhân viên này?')) return;
+    if (!window.confirm('Xóa nhân viên này khỏi hệ thống?')) return;
     persist(rows.filter((r) => String(r.id) !== String(id)));
   };
 
@@ -191,7 +193,7 @@ function AdminEmployee({ embedded = false }) {
       {loadError && <div className="admin-msg admin-msg--error">{loadError}</div>}
       {saveError && <div className="admin-msg admin-msg--error">{saveError}</div>}
       {loading ? (
-        <p>Đang tải...</p>
+        <p>Đang tải danh sách nhân viên...</p>
       ) : view === 'list' ? (
         <>
           <div className="admin-toolbar admin-toolbar--row">
@@ -199,7 +201,7 @@ function AdminEmployee({ embedded = false }) {
               + Thêm nhân viên
             </button>
             <div className="admin-toolbar-search">
-              <label htmlFor="admin-employee-search-id">Tìm kiếm: </label>
+              <label htmlFor="admin-employee-search-id">Tìm ID: </label>
               <input
                 id="admin-employee-search-id"
                 type="text"
@@ -229,32 +231,38 @@ function AdminEmployee({ embedded = false }) {
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Vai trò</th>
-                  <th>Tên</th>
-                  <th>Giới tính</th>
-                  <th>Ngày sinh</th>
-                  <th>Điện thoại</th>
+                  <th>Họ và Tên</th>
+                  <th>Chức vụ</th>
+                  <th>Số điện thoại</th>
+                  <th>Email</th>
+                  <th>Mức lương</th>
+                  <th>Trạng thái</th>
                   <th />
                 </tr>
               </thead>
               <tbody>
                 {displayedRows.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="admin-table_empty">
+                    <td colSpan={8} className="admin-table_empty">
                       {appliedSearchId.trim()
-                        ? `Không có nhân viên với ID "${appliedSearchId.trim()}".`
-                        : 'Chưa có nhân viên.'}
+                        ? `Không tìm thấy nhân viên có ID "${appliedSearchId.trim()}".`
+                        : 'Hiện tại chưa có nhân viên nào.'}
                     </td>
                   </tr>
                 ) : (
                   displayedRows.map((r) => (
                     <tr key={r.id}>
                       <td>{r.id}</td>
-                      <td>{r.role}</td>
-                      <td>{r.name}</td>
-                      <td>{r.gender}</td>
-                      <td>{r.birthdate}</td>
-                      <td>{r.phone}</td>
+                      <td><strong>{r.name}</strong></td>
+                      <td>{r.posittion || 'Chưa cập nhật'}</td>
+                      <td>{r.phone || '---'}</td>
+                      <td>{r.email || '---'}</td>
+                      <td>{r.salary ? Number(r.salary).toLocaleString('vi-VN') + ' đ' : '---'}</td>
+                      <td>
+                        <span className={`status-badge ${r.status === 'Đang làm việc' ? 'active' : 'inactive'}`}>
+                          {r.status || 'Đang làm việc'}
+                        </span>
+                      </td>
                       <td>
                         <div className="admin-table_actions">
                           <button
@@ -284,25 +292,16 @@ function AdminEmployee({ embedded = false }) {
         </>
       ) : (
         <form className="admin-form-card" onSubmit={handleSubmitForm}>
-          <h2>{isNew ? 'Thêm nhân viên' : 'Sửa nhân viên'}</h2>
+          <h2>{isNew ? 'Thêm nhân viên mới' : 'Cập nhật thông tin nhân viên'}</h2>
           <div className="admin-form-grid">
             {!isNew && (
               <label>
-                ID
-                <input value={form.id} readOnly />
+                Mã nhân viên (ID)
+                <input value={form.id} readOnly style={{ backgroundColor: '#e9ecef' }} />
               </label>
             )}
             <label>
-              Vai trò
-              <input
-                type="text"
-                value={form.role}
-                onChange={(e) => handleFormChange('role', e.target.value)}
-                required
-              />
-            </label>
-            <label>
-              Tên nhân viên
+              Họ và tên nhân viên
               <input
                 type="text"
                 value={form.name}
@@ -311,36 +310,57 @@ function AdminEmployee({ embedded = false }) {
               />
             </label>
             <label>
-              Giới tính
+              Chức vụ / Vị trí
               <input
                 type="text"
-                value={form.gender}
-                onChange={(e) => handleFormChange('gender', e.target.value)}
+                value={form.posittion}
+                onChange={(e) => handleFormChange('posittion', e.target.value)}
+                placeholder="Ví dụ: Nhân viên bán hàng"
               />
             </label>
             <label>
-              Ngày sinh
-              <input
-                type="text"
-                value={form.birthdate}
-                onChange={(e) => handleFormChange('birthdate', e.target.value)}
-              />
-            </label>
-            <label>
-              Điện thoại
+              Số điện thoại
               <input
                 type="text"
                 value={form.phone}
                 onChange={(e) => handleFormChange('phone', e.target.value)}
               />
             </label>
+            <label>
+              Địa chỉ Email
+              <input
+                type="email"
+                value={form.email}
+                onChange={(e) => handleFormChange('email', e.target.value)}
+              />
+            </label>
+            <label>
+              Mức lương (VNĐ)
+              <input
+                type="number"
+                value={form.salary}
+                onChange={(e) => handleFormChange('salary', e.target.value)}
+              />
+            </label>
+            <label>
+              Trạng thái công việc
+              <select
+                value={form.status}
+                onChange={(e) => handleFormChange('status', e.target.value)}
+                style={{ width: '100%', padding: '6px', borderRadius: '4px', border: '1px solid #ccc' }}
+              >
+                <option value="Đang làm việc">Đang làm việc</option>
+                <option value="Đã nghỉ việc">Đã nghỉ việc</option>
+                <option value="Tạm nghỉ">Tạm nghỉ</option>
+              </select>
+            </label>
           </div>
           <div className="admin-form-actions">
             <button type="submit" className="admin-btn" disabled={saving}>
-              {saving ? 'Đang lưu...' : 'Lưu'}
+              {saving ? 'Đang cập nhật...' : 'Xác nhận Lưu'}
             </button>
             <button type="button" className="admin-btn admin-btn--ghost" onClick={cancelForm} disabled={saving}>
-              Hủy
+              Hủy bỏ
             </button>
           </div>
         </form>

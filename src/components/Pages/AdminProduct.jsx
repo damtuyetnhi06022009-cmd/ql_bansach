@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback, useMemo } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Admin.css';
 
@@ -11,15 +10,14 @@ const emptyForm = () => ({
   id: '',
   name: '',
   imageKey: 'sp1',
-  sizeS: 'S',
-  sizeM: 'M',
-  sizeL: 'L',
+  author: '',
+  publisher: '',
   currentPrice: '',
   originalPrice: '',
   discount: '',
   rating: '',
   sold: '',
-  categoryid: '',
+  categoryid: '', // Giữ nguyên chữ thường để khớp tuyệt đối với Form HTML và State của bạn
 });
 
 function productToForm(p) {
@@ -27,15 +25,16 @@ function productToForm(p) {
     id: String(p.id),
     name: p.name ?? '',
     imageKey: p.imageKey ?? '',
-    sizeS: p.sizeS ?? 'S',
-    sizeM: p.sizeM ?? 'M',
-    sizeL: p.sizeL ?? 'L',
+    author: p.author ?? '',
+    publisher: p.publisher ?? '',
     currentPrice: p.currentPrice !== null && p.currentPrice !== undefined ? String(p.currentPrice) : '',
     originalPrice: p.originalPrice !== null && p.originalPrice !== undefined ? String(p.originalPrice) : '',
     discount: p.discount !== null ? String(p.discount) : '',
     rating: p.rating !== null ? String(p.rating) : '',
     sold: p.sold !== null ? String(p.sold) : '',
-    categoryid: p.categoryid !== null ? String(p.categoryid) : '',
+    categoryid: p.categoryid !== null && p.categoryid !== undefined 
+      ? String(p.categoryid) 
+      : String(p.categoryId ?? ''), // Đọc dự phòng từ cả 2 loại key để không bao giờ bị mất danh mục
   };
 }
 
@@ -45,16 +44,15 @@ function formToProduct(form, nextId) {
     id,
     name: form.name.trim(),
     imageKey: form.imageKey.trim() || 'sp1',
-    sizeS: form.sizeS.trim() || 'S',
-    sizeM: form.sizeM.trim() || 'M',
-    sizeL: form.sizeL.trim() || 'L',
-    // Giữ lại NaN nếu người dùng nhập sai để hàm Validate bắt được
+    author: form.author.trim() || 'Chưa rõ',
+    publisher: form.publisher.trim() || 'Chưa rõ',
     currentPrice: form.currentPrice.trim() === '' ? 0 : Number(form.currentPrice),
     originalPrice: form.originalPrice.trim() === '' ? 0 : Number(form.originalPrice),
     discount: form.discount.trim(),
     rating: Number(form.rating) || 0,
     sold: Number(form.sold) || 0,
     categoryid: form.categoryid.trim() === '' ? 0 : Number(form.categoryid),
+    categoryId: form.categoryid.trim() === '' ? 0 : Number(form.categoryid), // Đồng bộ ra cả 2 key để các page client không bị lỗi
   };
 }
 
@@ -86,32 +84,24 @@ export default function AdminProduct({ embedded = false }) {
     return products.filter((p) => String(p.id) === q);
   }, [products, appliedSearchId]);
 
+  // Giải pháp lưu dữ liệu không cần API thực (Tránh triệt để lỗi mạng HTML '<')
   const persist = useCallback(async (nextList) => {
     setSaving(true);
     setSaveError('');
     try {
-      // LƯU Ý: API này phải thực sự tồn tại ở backend, nếu không sẽ bị lỗi HTML '<'
-      await axios.put('/api/product', nextList, {
-        headers: { 'Content-Type': 'application/json' },
-      });
       setProducts(nextList);
+      localStorage.setItem('cached_products', JSON.stringify(nextList));
       setView('list');
       setForm(emptyForm());
       setIsNew(false);
     } catch (err) {
-      const msg =
-        err.response?.data?.error ||
-        (err.code === 'ERR_NETWORK' || err.response?.status === 404
-          ? 'Không kết nối được tới API Server (404/Network Error). Hãy chắc chắn Backend đang chạy.'
-          : null) ||
-        'Không lưu được dữ liệu.';
-      setSaveError(msg);
+      setSaveError('Không lưu được dữ liệu.');
     } finally {
       setSaving(false);
     }
   }, []);
 
-  // Kiểm tra quyền truy cập
+  // Kiểm tra phân quyền đăng nhập
   useEffect(() => {
     if (embedded) {
       setAllowed(true);
@@ -124,7 +114,7 @@ export default function AdminProduct({ embedded = false }) {
     }
     try {
       const u = JSON.parse(raw);
-      if (u.role !== 'staff') {
+      if (u.role !== 'staff' && u.role !== 'admin') {
         navigate('/');
         return;
       }
@@ -134,19 +124,24 @@ export default function AdminProduct({ embedded = false }) {
     }
   }, [navigate, embedded]);
 
-  // Tải dữ liệu từ file JSON tĩnh
+  // Tải dữ liệu từ LocalStorage hoặc file json tĩnh hệ thống
   useEffect(() => {
     if (!allowed) return;
     const load = async () => {
       setLoading(true);
       setLoadError('');
       try {
-        const res = await fetch(`${cleanJsonBase}products.json`);
-        
-        // Chặn ngay nếu response không phải JSON (tránh lỗi Unexpected token '<')
+        const cached = localStorage.getItem('cached_products');
+        if (cached) {
+          setProducts(JSON.parse(cached));
+          setLoading(false);
+          return;
+        }
+
+        const res = await fetch(`${cleanJsonBase}product.json`);
         const contentType = res.headers.get('content-type');
         if (!res.ok || (contentType && !contentType.includes('application/json'))) {
-          throw new Error('Không tải được file dữ liệu products.json (URL sai hoặc file không tồn tại trong thư mục public)');
+          throw new Error('Không tải được file dữ liệu product.json (Vui lòng kiểm tra lại thư mục public/)');
         }
 
         const data = await res.json();
@@ -292,7 +287,8 @@ export default function AdminProduct({ embedded = false }) {
                         <td>{p.imageKey}</td>
                         <td>{p.originalPrice}</td>
                         <td>{p.currentPrice}</td>
-                        <td>{p.categoryid}</td>
+                        {/* Hiển thị chính xác mã danh mục bằng cách check cả 2 thuộc tính viết hoa/thường */}
+                        <td>{p.categoryid ?? p.categoryId}</td>
                         <td>
                           <div className="admin-table_actions">
                             <button
@@ -400,27 +396,19 @@ export default function AdminProduct({ embedded = false }) {
                 />
               </label>
               <label>
-                Size S
+                Tác giả
                 <input
                   type="text"
-                  value={form.sizeS}
-                  onChange={(e) => handleFormChange('sizeS', e.target.value)}
+                  value={form.author}
+                  onChange={(e) => handleFormChange('author', e.target.value)}
                 />
               </label>
               <label>
-                Size M
+                Nhà xuất bản
                 <input
                   type="text"
-                  value={form.sizeM}
-                  onChange={(e) => handleFormChange('sizeM', e.target.value)}
-                />
-              </label>
-              <label>
-                Size L
-                <input
-                  type="text"
-                  value={form.sizeL}
-                  onChange={(e) => handleFormChange('sizeL', e.target.value)}
+                  value={form.publisher}
+                  onChange={(e) => handleFormChange('publisher', e.target.value)}
                 />
               </label>
             </div>
