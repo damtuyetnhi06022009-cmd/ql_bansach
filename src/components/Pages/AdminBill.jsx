@@ -278,19 +278,19 @@ function AdminBill({ embedded = false }) {
                         <td>{r.total}</td>
                         <td>{statusLabel(String(r.status || '').toLowerCase())}</td>
                         <td>
-                          <div className="admin-table_actions">
+                          <div className="admin-table__actions">
                             <button
                               type="button"
-                              className="admin-table_link"
-                              onClick={() => openEdit(r)}
+                              className="admin-table__link"
+                              onClick={() => openEdit(p)}
                               disabled={saving}
                             >
                               Sửa
                             </button>
                             <button
                               type="button"
-                              className="admin-table_link"
-                              onClick={() => handleDelete(r.id)}
+                              className="admin-table__link admin-table__link--danger"
+                              onClick={() => handleDelete(p.id)}
                               disabled={saving}
                             >
                               Xóa

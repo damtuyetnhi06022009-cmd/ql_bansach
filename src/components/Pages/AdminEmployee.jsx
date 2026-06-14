@@ -264,24 +264,24 @@ function AdminEmployee({ embedded = false }) {
                         </span>
                       </td>
                       <td>
-                        <div className="admin-table_actions">
-                          <button
-                            type="button"
-                            className="admin-table_link"
-                            onClick={() => openEdit(r)}
-                            disabled={saving}
-                          >
-                            Sửa
-                          </button>
-                          <button
-                            type="button"
-                            className="admin-table_link admin-table_link--danger"
-                            onClick={() => handleDelete(r.id)}
-                            disabled={saving}
-                          >
-                            Xóa
-                          </button>
-                        </div>
+                        <div className="admin-table__actions">
+                            <button
+                              type="button"
+                              className="admin-table__link"
+                              onClick={() => openEdit(p)}
+                              disabled={saving}
+                            >
+                              Sửa
+                            </button>
+                            <button
+                              type="button"
+                              className="admin-table__link admin-table__link--danger"
+                              onClick={() => handleDelete(p.id)}
+                              disabled={saving}
+                            >
+                              Xóa
+                            </button>
+                          </div>
                       </td>
                     </tr>
                   ))

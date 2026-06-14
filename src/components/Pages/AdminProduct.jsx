@@ -290,10 +290,10 @@ export default function AdminProduct({ embedded = false }) {
                         {/* Hiển thị chính xác mã danh mục bằng cách check cả 2 thuộc tính viết hoa/thường */}
                         <td>{p.categoryid ?? p.categoryId}</td>
                         <td>
-                          <div className="admin-table_actions">
+                          <div className="admin-table__actions">
                             <button
                               type="button"
-                              className="admin-table_link"
+                              className="admin-table__link"
                               onClick={() => openEdit(p)}
                               disabled={saving}
                             >
@@ -301,7 +301,7 @@ export default function AdminProduct({ embedded = false }) {
                             </button>
                             <button
                               type="button"
-                              className="admin-table_link admin-table_link--danger"
+                              className="admin-table__link admin-table__link--danger"
                               onClick={() => handleDelete(p.id)}
                               disabled={saving}
                             >
